@@ -1,0 +1,14 @@
+{application, restsvc, [
+	{description, ""},
+	{vsn, "0.1.0"},
+	{id, "git"},
+	{modules, []},
+	{registered, []},
+	{applications, [
+		kernel,
+		stdlib,
+		cowboy
+	]},
+	{mod, {restsvc_app, []}},
+	{env, []}
+]}.

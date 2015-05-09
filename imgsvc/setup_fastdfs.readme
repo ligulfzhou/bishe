@@ -1,0 +1,62 @@
+/
+/fastdfs介绍: http://tech.uc.cn/?p=221
+/fastdfs安装: (很多)http://www.jb51.net/article/25695.htm
+/
+
+fastdfs集群包括客户端(client), 跟踪服务器(tracker server)和存储服务器(storage server)
+
+client: 请求发起方,调用api于tracker和storage交互
+tracker: 主要做调度工作，起负载均衡的作用.在内存中记录集群中所有存储组和存储服务器的状态信息，
+        是客户端和数据服务器交互的枢纽。相比GFS中的master更为精简，不记录文件索引信息，占用的内存量很少.
+storage: 存储服务器(又称：存储节点或数据服务器)，文件和文件属性（meta data）都保存到存储服务器上.
+        Storage server直接利用OS的文件系统调用管理文件.
+
+
+官网: code.google.com/p/fastdfs
+    FastDFS_v4.06.tar.gz         (fastdfs在tracker和storage上都要安装)
+    fdfs_client-py-1.2.6.tar.gz  (client上只需转上客户端库)   
+
+
+(以一台tracker192.128.1.110, 两台storage192.128.1.111-2为例, 两台组一个group,组名group1
+    数据和日志存放地址/root/fastdfs/{client, storage, tracker})
+
+mkdir /root/fastdfs/{storage,client,tracker}
+
+一: 安装fastdfs
+    1: 安装所需的libevent库
+        yum install libevent-devel
+    2: 安装Fastdfs
+        tar zxvf FastDFS_v4.06.tar.gz (解压)
+        cd FastDFS
+        ./make.sh                     (编译)  
+        ./make.sh install             (安装)
+    3: 配置
+        tracker:修改/etc/fdfs/tracker.conf
+            bind_addr:  绑定的本机地址  192.168.1.110
+            base_path: 存放log的目录   /root/fastdfs/tracker
+        storage:修改/etc/fdfs/storage.conf
+            group_name:  group1
+            bind_addr: 绑定本机的地址(不写会绑定本机所有地址) 192.168.1.111 (112)
+            base_path: 存放数据和日志的目录  /root/fastdfs/storage
+            store_path0: 与上一个一样就可以
+            tracker_server: 可以写多个地址,将tracker server的地址写上 192.168.1.110:22122
+            (再动态添加storage服务器时,只要配置这些,换一个group_name,便实现动态添加, 
+                相同group_name的storage机器中存储的文件会同步)    
+
+    4: 运行
+        运行tracker: /usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf
+        运行storage: /usr/local/bin/fdfs_storage /etc/fdfs/storage.conf
+        关闭和重启: /usr/local/bin/stop.sh /usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf
+                    /usr/local/bin/restart.sh /usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf
+        开机自动开启,将这两条命令放置到/etc/rc.d/rc.local中
+
+二: 客户端
+    安装fdfs_client-py-1.2.6.tar.gz
+        tar zxvf fdfs_client-py-1.2.6.tar.gz
+        cd fdfs_client-py
+        python setup.py install
+        出现没有Python.h头文件需要装python-devel
+    配置:修改/etc/fdfs/client.conf
+        base_path: 存放日志目录    /root/fastdfs/client
+        tracker_server:     192.168.1.110:22122  有多台tracker服务器可以写多个
+

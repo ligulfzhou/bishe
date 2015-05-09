@@ -1,0 +1,14 @@
+Pillow==2.7.0
+Momoko==1.1.5
+PIL==1.1.7
+argparse==1.2.1
+backports.ssl-match-hostname==3.4.0.2
+certifi==14.05.14
+ecdsa==0.13
+fdfs-client-py==1.2.6
+meld3==1.0.0
+paramiko==1.15.2
+psycopg2==2.6
+pycrypto==2.6.1
+tornado==4.1
+wsgiref==0.1.2
