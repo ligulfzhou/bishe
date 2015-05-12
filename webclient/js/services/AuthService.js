@@ -1,4 +1,4 @@
-Blog.service('AuthService', AuthService = function($q, localStorageService, Session) {
+App.service('AuthService', AuthService = function($q, localStorageService, Session) {
 
     this.login = function(credentials) {
         var me = this;

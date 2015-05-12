@@ -1,4 +1,4 @@
-Blog.factory('Session', function(Restangular) {
+App.factory('Session', function(Restangular) {
     var Session;
     Session = {
         create: function(data, bypassErrorInterceptor) {

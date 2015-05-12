@@ -1,4 +1,4 @@
-Blog.factory('User', function(Restangular) {
+App.factory('User', function(Restangular) {
     var User;
     User = {
         create: function(user) {

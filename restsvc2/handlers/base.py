@@ -19,7 +19,7 @@ class BaseHandler(tornado.web.RequestHandler):
 		username, password = auth_decoded.split(':', 2)
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, nrole_id from customers \
+			cursor.execute("select nid, cname, nrole from tbusers \
 				where cname='{0}' and cpassword='{1}'".format(username, password))
 		except:
 			raise HTTPError(500, "db error")
@@ -28,6 +28,6 @@ class BaseHandler(tornado.web.RequestHandler):
 			cursor.close()
 			return {"nid":userinfo[0],
 					"cname":userinfo[1],
-					"role":userinfo[2]}
+					"nrole":userinfo[2]}
 		else:
 			return None

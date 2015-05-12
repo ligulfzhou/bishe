@@ -1,4 +1,4 @@
-window.Blog = angular.module('Blog', ['ngRoute', 'restangular', 'LocalStorageModule'])
+window.App = angular.module('App', ['ngRoute', 'restangular', 'LocalStorageModule'])
 
 .run(function($location, Restangular, AuthService) {
     Restangular.setFullRequestInterceptor(function(element, operation, route, url, headers, params, httpConfig) {
