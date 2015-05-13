@@ -11,19 +11,22 @@ class CategoriesHandler(BaseHandler):
 	def get(self):
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname from categories")
+			cursor.execute("select nid, cname from tbcategories")
 		except:
 			raise HTTPError(500, "db error")
 		categories = cursor.fetchall()
 		categories_json = [{"nid":category[0], "cname":category[1]} for category in categories]
 		cursor.close()
-		return json_encode({
+		return self.write(json_encode({
 				"categories":categories_json
-			})
+			}))
 
 	@admin_required
 	def post(self):
 		category = json.loads(self.request.body)
+
+
+		pass
 
 
 class CategoryHandler(BaseHandler):
@@ -31,7 +34,7 @@ class CategoryHandler(BaseHandler):
 	def get(self, id):
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname from categories where nid={0}".format(id))
+			cursor.execute("select nid, cname from tbcategories where nid={0}".format(id))
 		except:
 			raise HTTPError(500, "db error")
 		if cursor.rowcount > 0:

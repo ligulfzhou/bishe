@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from handlers import test, categories, goods, login, users, categoriedgoods
+from handlers import test, categories, goods, login, users, orders, categoriedgoods
 
 url_patterns = [
     (r"/api/v1", test.TestHandler),

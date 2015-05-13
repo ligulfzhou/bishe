@@ -108,11 +108,9 @@ class OrderHandler(BaseHandler):
 	'''
 	@login_required
 	def put(self, id):
-		'''
 		#if the order is not handler,then the operation is permitted
 		#	1: user: change the order info(eg: orderitems)
 		#	2: admin: change the order status(change status from unhandlered to handlered)
-		'''
 		userid = self.current_user['nid']
 		cursor = self.conn.cursor()
 		try:

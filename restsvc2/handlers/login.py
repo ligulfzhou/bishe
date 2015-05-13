@@ -16,7 +16,8 @@ class LoginHandler(BaseHandler):
 
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid from customer where cname='{0}' and cpassword='{1}'".format(username, password))
+			cursor.execute("select nid from tbusers \
+				where cname='{0}' and cpassword='{1}'".format(username, password))
 		except:
 			raise HTTPError(500, "db error")
 		if cursor.rowcount > 0:
@@ -24,4 +25,4 @@ class LoginHandler(BaseHandler):
 					"token" : base64.encodestring("{0}:{1}".format(username, password))
 				}))
 		else:
-			raise httpclient(401, 'un authenrized')
+			raise HTTPError(401, 'un authenrized')

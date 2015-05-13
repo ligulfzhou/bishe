@@ -33,7 +33,7 @@ create table tbusers (
 	cname text not null,
 	cpassword text not null,
 	dcreate_at timestamp with time zone default now(),
-	nrole int not null default 0 --- default is 0, but admin is 1
+	nrole int default 0 --- default is 0, but admin is 1
 );
 
 
@@ -48,7 +48,7 @@ create table tbgoods(
 	cname text not null,
 	fprice float not null,
 	cdesc text not null,
-	ncategoryid int references tbcategories(nid) on delete cascade,
+	ncategoryid int not null, --references tbcategories(nid) on delete cascade,
 	ncount int default 0
 );
 
@@ -84,6 +84,8 @@ insert into tbusers (nid, cname, cpassword) values (1, 'user1', 'user1');
 insert into tbusers (nid, cname, cpassword) values (2, 'user2', 'user2');
 insert into tbusers (nid, cname, cpassword) values (3, 'user3', 'user3');
 insert into tbusers (nid, cname, cpassword) values (4, 'user4', 'user4');
+
+insert into tbusers (nid, cname, cpassword, nrole) values (5, 'admin', 'admin', 1);
 
 -- 2: fake categories
 insert into tbcategories (nid, cname) values (1, 'books');

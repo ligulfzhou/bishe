@@ -7,7 +7,7 @@ from tornado.httpclient import HTTPError
 from utils import admin_required, login_required
 
 
-class UsersHandler:
+class UsersHandler(BaseHandler):
 
 	@admin_required
 	def get(self):
@@ -77,7 +77,7 @@ class UserHandler(BaseHandler):
 
 			try:
 				cursor.execute("select nid, cname, dcreate_at \
-					from users where nid={0}".format(id))
+					from tbusers where nid={0}".format(id))
 			except:
 				raise HTTPError(500)
 			user = cursor.fetchone()
@@ -90,7 +90,7 @@ class UserHandler(BaseHandler):
 		else:										# admin role
 			try:
 				cursor.execute("select nid, cname, dcreate_at, nrole \
-					from users where nid={0}".format(id))
+					from tbusers where nid={0}".format(id))
 			except:
 				raise HTTPError(500)
 			user = cursor.fetchone()

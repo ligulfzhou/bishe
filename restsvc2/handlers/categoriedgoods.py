@@ -6,12 +6,13 @@ from tornado.escape import json_encode
 from tornado.httpclient import HTTPError
 from utils import admin_required, login_required
 
-class GoodsHandler(BaseHandler):
+class CategoriedGoodsHandler(BaseHandler):
 
-	def get(self):
+	def get(self, id, goods=True):
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, fprice, cdesc, ncategoryid, ncount from tbgoods")
+			cursor.execute("select nid, cname, fprice, cdesc, ncategoryid, ncount \
+				from tbgoods where ncategoryid={0}".format(id))
 		except:
 			raise HTTPError(500)
 		goods = cursor.fetchall()
@@ -26,9 +27,9 @@ class GoodsHandler(BaseHandler):
 		return self.write(json_encode({
 			'goods':goods_json
 			}))
-
+'''
 	@admin_required
-	def post(self):
+	def post(self, id, goods=True):
 		good = json.loads(self.request.body)
 		cname = good.get('cname')
 		fprice = good.get('fprice')
@@ -37,7 +38,7 @@ class GoodsHandler(BaseHandler):
 		nount = goods_json.get('ncount')
 
 		cursor = self.conn.cursor()
-		''' check available is omitted '''
+		# check available is omitted 
 		try:
 			cursor.execute("insert into tbgoods (cname, fprice, cdesc, ncategoryid, ncount) \
 				values ('{0}', {1}, '{2}', {3}, {4}) returning nid".format(cname, fprice, cdesc, ncategoryid, ncount))
@@ -61,11 +62,13 @@ class GoodsHandler(BaseHandler):
 				'ncategoryid':goodinfo[4],
 				'ncount':goodinfo[5]
 				}))
+'''
 
 
+'''
 class GoodHandler(BaseHandler):
 
-	def get(self, id):
+	def get(self, id1, goods=True, id2):
 		cursor = self.conn.cursor()
 		try:
 			cursor.execute("select nid, cname, fprice, cdesc, ncategoryid, ncount \
@@ -80,37 +83,6 @@ class GoodHandler(BaseHandler):
 			'fprice':good[2],
 			'cdesc':good[3],
 			'ncategoryid':good[4],
-			'nount':good[5]
+			'nount':good[5]} 
 			}))
-
-
-	@admin_required
-	def put(self, id):
-		good = json.loads(self.request.body)
-		cname = good.get('cname')
-		fprice = good.get('fprice')
-		cdesc = good.get('cdesc')
-		ncategoryid = good.get('ncategoryid')
-		nount = goods_json.get('ncount')
-
-		cursor = self.conn.cursor()
-		try:
-			cursor.execute("update tbgoods set cname={0}, fprice={1}, cdesc='{2}', ncategoryid={3}, \
-				ncount={4} where nid={5}".format(cname, fprice, cdesc, ncategoryid, ncount, id))
-		except:
-			raise HTTPError(500)
-		self.conn.commit()
-		cursor.close()
-		return
-
-
-	@admin_required
-	def delete(self, id):
-		cursor = self.conn.cursor()
-		try:
-			cursor.execute("delete from tbgoods where nid={0}".format(id))
-		except:
-			raise HTTPError(500)
-		self.conn.commit()
-		cursor.close()
-		return
+'''
