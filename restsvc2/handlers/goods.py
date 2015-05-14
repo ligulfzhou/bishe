@@ -75,12 +75,12 @@ class GoodHandler(BaseHandler):
 		goodinfo = cursor.fetchone()
 		cursor.close()
 		return self.write(json_encode({
-			'nid':good[0],
-			'cname':good[1],
-			'fprice':good[2],
-			'cdesc':good[3],
-			'ncategoryid':good[4],
-			'nount':good[5]
+			'nid':goodinfo[0],
+			'cname':goodinfo[1],
+			'fprice':goodinfo[2],
+			'cdesc':goodinfo[3],
+			'ncategoryid':goodinfo[4],
+			'nount':goodinfo[5]
 			}))
 
 

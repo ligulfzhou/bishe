@@ -13,12 +13,12 @@ class OrdersHandler(BaseHandler):
 		userid = self.current_user['nid']
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, ftotal from tborders where nuser_id={0}".format(userid))
+			cursor.execute("select nid, dcreate_at, ftotal from tborders where nuser_id={0}".format(userid))
 		except:
 			raise HTTPError(500)
 		if cursor.rowcount > 0:
 			orders = cursor.fetchall()
-			orders_json = [{'nid':order['nid'], 'ftotal':order['ftotal']} for order in orders]
+			orders_json = [{'nid':order[0], 'dcreate_at':time.mktime(order[1].timetuple()),'ftotal':order[2]} for order in orders]
 			return self.write(json_encode({
 				'orders':orders_json
 				}))
@@ -84,7 +84,8 @@ class OrderHandler(BaseHandler):
 
 			return self.write(json_encode({
 				'nid':orderinfo[0],
-				'ncreate_at':orderinfo[1],
+				'ncreate_at':time.mktime(orderinfo[1].timetuple()),
+				'nuser_id':orderinfo[2],
 				'ftotal':orderinfo[3],
 				'nhandlered':orderinfo[4]
 				}))
@@ -99,7 +100,7 @@ class OrderHandler(BaseHandler):
 
 			return self.write(json_encode({
 				'nid':orderinfo[0],
-				'ncreate_at':orderinfo[1],
+				'ncreate_at':time.mktime(orderinfo[1].timetuple()),
 				'nuser_id':orderinfo[2],
 				'ftotal':orderinfo[3],
 				'nhandlered':orderinfo[4]

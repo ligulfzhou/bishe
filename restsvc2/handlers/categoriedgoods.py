@@ -64,7 +64,6 @@ class CategoriedGoodsHandler(BaseHandler):
 				}))
 '''
 
-
 '''
 class GoodHandler(BaseHandler):
 

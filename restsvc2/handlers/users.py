@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import time
 import json
 from base import BaseHandler
 from tornado.escape import json_encode
@@ -19,7 +20,8 @@ class UsersHandler(BaseHandler):
 		users = cursor.fetchall()
 		users_json = [{'nid':user[0], 
 						'cname':user[1], 
-						'dcreate_at':user[2],
+						#'dcreate_at':user[2],
+						'dcreate_at':time.mktime(user[2].timetuple()),
 						'nrole':user[3]} for user in users]
 		return self.write(json_encode({
 			'users':users_json
@@ -57,7 +59,8 @@ class UsersHandler(BaseHandler):
 				return self.write(json_encode({
 					'nid':user[0],
 					'cname':user[1],
-					'dcreate_at':user[2]
+					#'dcreate_at':user[2].
+					'dcreate_at':time.mktime(user[2].timetuple()),
 					}))
 			else:
 				raise HTTPError(500)
@@ -72,7 +75,7 @@ class UserHandler(BaseHandler):
 
 		cursor = self.conn.cursor()
 		if self.current_user['nrole'] == 0: 		# user role
-			if self.current_user['nid'] != id:
+			if self.current_user['nid'] != int(id):
 				raise HTTPError(403)
 
 			try:
@@ -85,7 +88,8 @@ class UserHandler(BaseHandler):
 			return self.write(json_encode({
 				'nid':user[0],
 				'cname':user[1],
-				'ccreate_at':user[2],
+				#'ccreate_at':user[2],
+				'dcreate_at':time.mktime(user[2].timetuple()),
 				}))
 		else:										# admin role
 			try:
@@ -98,7 +102,8 @@ class UserHandler(BaseHandler):
 			return self.write(json_encode({
 				'nid':user[0],
 				'cname':user[1],
-				'ccreate_at':user[2],
+				#'ccreate_at':user[2],
+				'dcreate_at':time.mktime(user[2].timetuple()),
 				'nrole':user[3]
 				}))
 

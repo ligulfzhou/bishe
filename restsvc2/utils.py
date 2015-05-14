@@ -19,9 +19,14 @@ def admin_required(method):
 
     @wraps(method)
     def wrapper(self, *args, **kwargs):
+        ''' now that, this function need admin role, login error alse raise 403
+        
+        if not self.current_user or self.current_user.get('nrole') == 0:
+            raise HTTPError(403)
+        '''
         if not self.current_user:
             raise HTTPError(401)
-        if self.current_user.get('role') == 0:
+        if self.current_user.get('nrole') == 0:
             raise HTTPError(403)
         return method(self, *args, **kwargs)
     return wrapper

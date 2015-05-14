@@ -54,7 +54,7 @@ create table tbgoods(
 
 create table tborders(
 	nid serial primary key,
-	ncreate_at timestamp with time zone default now(),
+	dcreate_at timestamp with time zone default now(),
 	nuser_id int references tbusers(nid),
 	ftotal float not null,
 	nhandlered int default 0
