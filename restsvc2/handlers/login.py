@@ -14,9 +14,9 @@ class LoginHandler(BaseHandler):
 		#userinfo_json = json.loads(self.request.body)
 		#userinfo = userinfo_json.get("user")
 		userinfo = self.request.body
-		print userinfo
-		# username = userinfo.get("username")
-		# password = userinfo.get("password")
+		# print userinfo
+		username = userinfo.get("username")
+		password = userinfo.get("password")
 
 		# username = self.get_argument('username', "lalala")
 		# password = self.get_argument('password', "lalalalala")
