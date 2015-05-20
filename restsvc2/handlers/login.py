@@ -13,10 +13,12 @@ class LoginHandler(BaseHandler):
 	def post(self):
 		#userinfo_json = json.loads(self.request.body)
 		#userinfo = userinfo_json.get("user")
-		userinfo = json.loads(self.request.body)
-		username = userinfo.get("username")
-		password = userinfo.get("password")
+		# userinfo = json.loads(self.request.body)
+		# username = userinfo.get("username")
+		# password = userinfo.get("password")
 
+		username = self.request.get_argument('username')
+		password = self.request.get_argument('password')
 		cursor = self.conn.cursor()
 		try:
 			cursor.execute("select nid, cname, dcreate_at, nrole from tbusers \
