@@ -10,6 +10,9 @@ class BaseHandler(tornado.web.RequestHandler):
 	def conn(self):
 		return self.application.db
 
+	# def set_default_header(self):
+	# 	self.add_header("Access-Control-Expose-Headers", "*")
+
 	def get_current_user(self):
 		auth_header = self.request.headers.get('Authorization')
 
