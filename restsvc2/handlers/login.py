@@ -17,8 +17,8 @@ class LoginHandler(BaseHandler):
 		# username = userinfo.get("username")
 		# password = userinfo.get("password")
 
-		username = self.request.get_argument('username')
-		password = self.request.get_argument('password')
+		username = self.get_argument('username')
+		password = self.get_argument('password')
 		print username, password
 		cursor = self.conn.cursor()
 		try:
