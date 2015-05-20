@@ -13,9 +13,10 @@ class LoginHandler(BaseHandler):
 	def post(self):
 		#userinfo_json = json.loads(self.request.body)
 		#userinfo = userinfo_json.get("user")
-		userinfo = json.loads(self.request.body)
-		username = userinfo.get("username")
-		password = userinfo.get("password")
+		userinfo = self.request.body
+		print userinfo
+		# username = userinfo.get("username")
+		# password = userinfo.get("password")
 
 		# username = self.get_argument('username', "lalala")
 		# password = self.get_argument('password', "lalalalala")
