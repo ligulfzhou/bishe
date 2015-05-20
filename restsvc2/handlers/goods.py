@@ -29,6 +29,9 @@ class GoodsHandler(BaseHandler):
 
 	@admin_required
 	def post(self):
+		#good_json = json.loads(self.request.body)
+		#good = good_json.get("good")
+		
 		good = json.loads(self.request.body)
 		cname = good.get('cname')
 		fprice = good.get('fprice')
@@ -54,12 +57,13 @@ class GoodsHandler(BaseHandler):
 			goodinfo = cursor.fetchone()
 			cursor.close()
 			return self.write(json_encode({
-				'nid':goodinfo[0],
-				'cname':goodinfo[1],
-				'fprice':goodinfo[2],
-				'cdesc':goodinfo[3],
-				'ncategoryid':goodinfo[4],
-				'ncount':goodinfo[5]
+				"good":{
+					'nid':goodinfo[0],
+					'cname':goodinfo[1],
+					'fprice':goodinfo[2],
+					'cdesc':goodinfo[3],
+					'ncategoryid':goodinfo[4],
+					'ncount':goodinfo[5]}
 				}))
 
 
@@ -86,6 +90,9 @@ class GoodHandler(BaseHandler):
 
 	@admin_required
 	def put(self, id):
+		#good_json = json.loads(self.request.body)
+		#good = good_json.get('good')
+		
 		good = json.loads(self.request.body)
 		cname = good.get('cname')
 		fprice = good.get('fprice')

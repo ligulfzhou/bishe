@@ -57,10 +57,12 @@ class UsersHandler(BaseHandler):
 					raise HTTPError(500)
 				user = cursor.fetchone()
 				return self.write(json_encode({
-					'nid':user[0],
-					'cname':user[1],
-					#'dcreate_at':user[2].
-					'dcreate_at':time.mktime(user[2].timetuple()),
+					'user':{
+							'nid':user[0],
+							'cname':user[1],
+							#'dcreate_at':user[2].
+							'dcreate_at':time.mktime(user[2].timetuple())
+							}
 					}))
 			else:
 				raise HTTPError(500)
@@ -86,10 +88,11 @@ class UserHandler(BaseHandler):
 			user = cursor.fetchone()
 			cursor.close()		
 			return self.write(json_encode({
-				'nid':user[0],
-				'cname':user[1],
-				#'ccreate_at':user[2],
-				'dcreate_at':time.mktime(user[2].timetuple()),
+				"user":{
+					'nid':user[0],
+					'cname':user[1],
+					#'ccreate_at':user[2],
+					'dcreate_at':time.mktime(user[2].timetuple())}
 				}))
 		else:										# admin role
 			try:
@@ -100,11 +103,12 @@ class UserHandler(BaseHandler):
 			user = cursor.fetchone()
 			cursor.close()		
 			return self.write(json_encode({
-				'nid':user[0],
-				'cname':user[1],
-				#'ccreate_at':user[2],
-				'dcreate_at':time.mktime(user[2].timetuple()),
-				'nrole':user[3]
+				"user":{
+					'nid':user[0],
+					'cname':user[1],
+					#'ccreate_at':user[2],
+					'dcreate_at':time.mktime(user[2].timetuple()),
+					'nrole':user[3]}
 				}))
 
 
@@ -121,8 +125,10 @@ class UserHandler(BaseHandler):
 				raise HTTPError(403)
 
 			user = json.loads(self.request.body)
-			nid, cname = user
-
+			#nid, cname = user
+			nid = user.get("nid")
+			cname = user.get("cname")
+			
 			if nid != id:
 				raise HTTPError(403)
 			cursor = self.conn.cursor()
@@ -136,7 +142,10 @@ class UserHandler(BaseHandler):
 			return
 		else:											# admin role
 			user = json.loads(self.request.body)
-			nid, cname, nrole = user
+			#nid, cname, nrole = user
+			nid = user.get("nid")
+			cname = user.get("cname")
+			nrole = user.get("nrole")
 
 			cursor = self.conn.cursor()
 			''' check the id ?'''

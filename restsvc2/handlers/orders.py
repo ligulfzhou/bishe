@@ -83,11 +83,12 @@ class OrderHandler(BaseHandler):
 				raise HTTPError(403)
 
 			return self.write(json_encode({
-				'nid':orderinfo[0],
-				'ncreate_at':time.mktime(orderinfo[1].timetuple()),
-				'nuser_id':orderinfo[2],
-				'ftotal':orderinfo[3],
-				'nhandlered':orderinfo[4]
+				"order":{
+					'nid':orderinfo[0],
+					'ncreate_at':time.mktime(orderinfo[1].timetuple()),
+					'nuser_id':orderinfo[2],
+					'ftotal':orderinfo[3],
+					'nhandlered':orderinfo[4]}
 				}))
 		else:
 			try:
@@ -99,11 +100,12 @@ class OrderHandler(BaseHandler):
 			cursor.close()
 
 			return self.write(json_encode({
-				'nid':orderinfo[0],
-				'ncreate_at':time.mktime(orderinfo[1].timetuple()),
-				'nuser_id':orderinfo[2],
-				'ftotal':orderinfo[3],
-				'nhandlered':orderinfo[4]
+				"order":{
+					'nid':orderinfo[0],
+					'ncreate_at':time.mktime(orderinfo[1].timetuple()),
+					'nuser_id':orderinfo[2],
+					'ftotal':orderinfo[3],
+					'nhandlered':orderinfo[4]}
 				}))
 
 	'''
