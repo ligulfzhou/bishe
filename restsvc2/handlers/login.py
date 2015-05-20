@@ -17,9 +17,12 @@ class LoginHandler(BaseHandler):
 		# username = userinfo.get("username")
 		# password = userinfo.get("password")
 
-		username = self.get_argument('username')
-		password = self.get_argument('password')
+		username = self.get_argument('username', "lalala")
+		password = self.get_argument('password', "lalalalala")
 		print username, password
+
+		body = self.request.body
+		print body
 		cursor = self.conn.cursor()
 		try:
 			cursor.execute("select nid, cname, dcreate_at, nrole from tbusers \
