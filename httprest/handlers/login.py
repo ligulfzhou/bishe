@@ -37,7 +37,7 @@ class LoginHandler(BaseHandler):
 					'cname' : user[2],
 					'dcreate_at' : time.mktime(user[3].timetuple()), 
 					'nrole' : user[4],
-					'token' : base64.encodestring("{0}:{1}".format(username, password))}
+					'token' : base64.encodestring("{0}:{1}".format(email, password))}
 				}))
 		else:
 			raise HTTPError(401, 'un authenrized')
