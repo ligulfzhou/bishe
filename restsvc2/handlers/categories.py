@@ -52,7 +52,7 @@ class CategoryHandler(BaseHandler):
 			cursor.close()
 			return self.write(json_encode({
 				"category":{
-					"id":category[0],
+					"nid":category[0],
 					"cname":category[1]}
 				}))
 
