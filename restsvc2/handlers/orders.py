@@ -40,9 +40,9 @@ class OrdersHandler(BaseHandler):
 		}
 		'''
 		userid = self.current_user['nid']     # current user id
-		orderinfo = json.loads(self.request.body)
-		ftotal = orderinfo['ftotal']
-		orderitems = orderinfo['orderitems']
+		#orderinfo = json.loads(self.request.body)
+		ftotal = self.get_argument('ftotal')
+		orderitems = self.get_argument('orderitems')
 
 		cursor = self.conn.cursor()
 		try:

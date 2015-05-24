@@ -14,15 +14,16 @@ class UsersHandler(BaseHandler):
 	def get(self):
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, dcreate_at, nrole from tbusers")
+			cursor.execute("select nid, cemail, cname, dcreate_at, nrole from tbusers")
 		except:
 			raise HTTPError(500)
 		users = cursor.fetchall()
 		users_json = [{'nid':user[0], 
-						'cname':user[1], 
+						'cemail':user[1],
+						'cname':user[2], 
 						#'dcreate_at':user[2],
-						'dcreate_at':time.mktime(user[2].timetuple()),
-						'nrole':user[3]} for user in users]
+						'dcreate_at':time.mktime(user[3].timetuple()),
+						'nrole':user[4]} for user in users]
 		return self.write(json_encode({
 			'users':users_json
 			}))
@@ -30,9 +31,10 @@ class UsersHandler(BaseHandler):
 
 	''' register user '''
 	def post(self):
-		user = json.loads(self.request.body)
-		username = user.get("username")
-		password = user.get("password")
+		# user = json.loads(self.request.body)
+		email = self.get_argument("email")
+		username = self.get_argument("username")
+		password = self.get_argument("password")
 		if username is not None and password is not None:
 			cursor = self.conn.cursor()
 			'''
@@ -43,15 +45,15 @@ class UsersHandler(BaseHandler):
 				raise HTTPError(500, "db error")
 			'''
 			try:
-				cursor.execute("insert into users (cname, cpassword) \
-					values ('{0}', '{1}') returning nid".format(username, password))
+				cursor.execute("insert into users (cemail, cname, cpassword) \
+					values ('{0}', '{1}', {2}') returning nid".format(email, username, password))
 			except:
 				raise HTTPError(500, "db error")
 			if cursor.rowcount > 0:
 				nid = cursor.fetchone()
 				self.conn.commit()
 				try:
-					cursor.execute("select nid, cname, dcreate_at \
+					cursor.execute("select nid, cemail, cname, dcreate_at \
 						from tbusers where nid={0}".format(0))
 				except:
 					raise HTTPError(500)
@@ -59,9 +61,10 @@ class UsersHandler(BaseHandler):
 				return self.write(json_encode({
 					'user':{
 							'nid':user[0],
-							'cname':user[1],
+							'cemail':user[1],
+							'cname':user[2],
 							#'dcreate_at':user[2].
-							'dcreate_at':time.mktime(user[2].timetuple())
+							'dcreate_at':time.mktime(user[3].timetuple())
 							}
 					}))
 			else:
@@ -81,7 +84,7 @@ class UserHandler(BaseHandler):
 				raise HTTPError(403)
 
 			try:
-				cursor.execute("select nid, cname, dcreate_at \
+				cursor.execute("select nid, cemail, cname, dcreate_at, nrole \
 					from tbusers where nid={0}".format(id))
 			except:
 				raise HTTPError(500)
@@ -90,13 +93,15 @@ class UserHandler(BaseHandler):
 			return self.write(json_encode({
 				"user":{
 					'nid':user[0],
-					'cname':user[1],
+					'cemail':user[1],
+					'cname':user[2],
 					#'ccreate_at':user[2],
-					'dcreate_at':time.mktime(user[2].timetuple())}
+					'dcreate_at':time.mktime(user[3].timetuple()),
+					'nrole':user[4]}
 				}))
 		else:										# admin role
 			try:
-				cursor.execute("select nid, cname, dcreate_at, nrole \
+				cursor.execute("select nid, cemail, cname, dcreate_at, nrole \
 					from tbusers where nid={0}".format(id))
 			except:
 				raise HTTPError(500)
@@ -105,10 +110,11 @@ class UserHandler(BaseHandler):
 			return self.write(json_encode({
 				"user":{
 					'nid':user[0],
-					'cname':user[1],
+					'cemail':user[1],
+					'cname':user[2],
 					#'ccreate_at':user[2],
-					'dcreate_at':time.mktime(user[2].timetuple()),
-					'nrole':user[3]}
+					'dcreate_at':time.mktime(user[3].timetuple()),
+					'nrole':user[4]}
 				}))
 
 
@@ -124,38 +130,39 @@ class UserHandler(BaseHandler):
 			if self.current_user['nid'] != id:
 				raise HTTPError(403)
 
-			user = json.loads(self.request.body)
+			#user = json.loads(self.request.body)
 			#nid, cname = user
-			nid = user.get("nid")
-			cname = user.get("cname")
-			
+			nid = self.get_argument("nid")
+			cname = self.get_argument("cname")
+			cpassword = self.get_argument("cpassword")
+
 			if nid != id:
 				raise HTTPError(403)
 			cursor = self.conn.cursor()
 			''' check the id ?'''
 			try:
-				cursor.execute("update users set cname={0} where nid={1}".format(cname, nid))
+				cursor.execute("update users set cname={0}, cpassword={1} \
+					where nid={2}".format(cname, cpassword, nid))
 			except:
 				raise HTTPError(500)
 			self.conn.commit()
 			cursor.close()
 			return
 		else:											# admin role
-			user = json.loads(self.request.body)
+			#user = json.loads(self.request.body)
 			#nid, cname, nrole = user
-			nid = user.get("nid")
-			cname = user.get("cname")
-			nrole = user.get("nrole")
+			nid = self.get_argument("nid")
+			cname = self.get_argument("cname")
+			cpassword = self.get_argument("cpassword")
+			nrole = self.get_argument("nrole")
 
 			cursor = self.conn.cursor()
 			''' check the id ?'''
 			try:
-				cursor.execute("update users set cname={0}, nrole={1} \
-					where nid={2}".format(cname, nrole, nid))
+				cursor.execute("update users set cname={0}, cpassword={1}, nrole={2} \
+					where nid={3}".format(cname, cpassword, nrole, nid))
 			except:
 				raise HTTPError(500)
 			self.conn.commit()
 			cursor.close()
 			return
-
-

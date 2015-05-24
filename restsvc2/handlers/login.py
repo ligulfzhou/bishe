@@ -13,21 +13,18 @@ class LoginHandler(BaseHandler):
 	def post(self):
 		#userinfo_json = json.loads(self.request.body)
 		#userinfo = userinfo_json.get("user")
-		userinfo = json.loads(self.request.body)
+		# userinfo = json.loads(self.request.body)
 		# print userinfo
-		username = userinfo.get("username")
-		password = userinfo.get("password")
+		# username = userinfo.get("username")
+		# password = userinfo.get("password")
 
-		# username = self.get_argument('username', "lalala")
-		# password = self.get_argument('password', "lalalalala")
-		# print username, password
+		email = self.get_argument('email', "lalala")
+		password = self.get_argument('password', "lalalalala")
 
-		# body = self.request.body
-		# print body
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, dcreate_at, nrole from tbusers \
-				where cname='{0}' and cpassword='{1}'".format(username, password))
+			cursor.execute("select nid, cemail, cname, dcreate_at, nrole from tbusers \
+				where cemail='{0}' and cpassword='{1}'".format(email, password))
 		except:
 			raise HTTPError(500, "db error")
 		if cursor.rowcount > 0:
@@ -36,9 +33,10 @@ class LoginHandler(BaseHandler):
 			return self.write(json_encode({
 				"user":{
 					'nid' : user[0],
-					'cname' : user[1],
-					'dcreate_at' : time.mktime(user[2].timetuple()), 
-					'nrole' : user[3],
+					'cemail' : user[1],
+					'cname' : user[2],
+					'dcreate_at' : time.mktime(user[3].timetuple()), 
+					'nrole' : user[4],
 					'token' : base64.encodestring("{0}:{1}".format(username, password))}
 				}))
 		else:

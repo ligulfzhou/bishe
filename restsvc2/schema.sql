@@ -30,6 +30,7 @@ drop table if exists tborderitems;
 ---------------------
 create table tbusers (
 	nid serial primary key,
+	cemail text not null,
 	cname text not null,
 	cpassword text not null,
 	dcreate_at timestamp with time zone default now(),
@@ -80,12 +81,12 @@ create index i_tbgoods_cname on tbgoods using btree (cname);               -- wh
 ------add fake data-------
 --------------------------
 -- 1: fake users
-insert into tbusers (nid, cname, cpassword) values (1, 'user1', 'user1');
-insert into tbusers (nid, cname, cpassword) values (2, 'user2', 'user2');
-insert into tbusers (nid, cname, cpassword) values (3, 'user3', 'user3');
-insert into tbusers (nid, cname, cpassword) values (4, 'user4', 'user4');
+insert into tbusers (nid, cemail, cname, cpassword) values (1, 'user1@user1.com', 'user1', 'user1');
+insert into tbusers (nid, cemail, cname, cpassword) values (2, 'user2@user2.com', 'user2', 'user2');
+insert into tbusers (nid, cemail, cname, cpassword) values (3, 'user3@user3.com', 'user3', 'user3');
+insert into tbusers (nid, cemail, cname, cpassword) values (4, 'user4@user4.com', 'user4', 'user4');
 
-insert into tbusers (nid, cname, cpassword, nrole) values (5, 'admin', 'admin', 1);
+insert into tbusers (nid, cemail, cname, cpassword, nrole) values (5, 'admin@admin.com','admin', 'admin', 1);
 
 -- 2: fake categories
 insert into tbcategories (nid, cname) values (1, 'books');

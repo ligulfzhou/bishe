@@ -21,7 +21,7 @@ class GoodsHandler(BaseHandler):
 			'fprice':good[2],
 			'cdesc':good[3],
 			'ncategoryid':good[4],
-			'nount':good[5]} 
+			'ncount':good[5]} 
 			for good in goods]
 		return self.write(json_encode({
 			'goods':goods_json
@@ -32,12 +32,12 @@ class GoodsHandler(BaseHandler):
 		#good_json = json.loads(self.request.body)
 		#good = good_json.get("good")
 		
-		good = json.loads(self.request.body)
-		cname = good.get('cname')
-		fprice = good.get('fprice')
-		cdesc = good.get('cdesc')
-		ncategoryid = good.get('ncategoryid')
-		nount = goods_json.get('ncount')
+		#good = json.loads(self.request.body)
+		cname = self.get_argument('cname')
+		fprice = self.get_argument('fprice')
+		cdesc = self.get_argument('cdesc')
+		ncategoryid = self.get_argument('ncategoryid')
+		nount = self.get_argument('ncount')
 
 		cursor = self.conn.cursor()
 		''' check available is omitted '''
@@ -93,12 +93,12 @@ class GoodHandler(BaseHandler):
 		#good_json = json.loads(self.request.body)
 		#good = good_json.get('good')
 		
-		good = json.loads(self.request.body)
-		cname = good.get('cname')
-		fprice = good.get('fprice')
-		cdesc = good.get('cdesc')
-		ncategoryid = good.get('ncategoryid')
-		nount = goods_json.get('ncount')
+		#good = json.loads(self.request.body)
+		cname = self.get_argument('cname')
+		fprice = self.get_argument('fprice')
+		cdesc = self.get_argument('cdesc')
+		ncategoryid = self.get_argument('ncategoryid')
+		nount = self.get_argument('ncount')
 
 		cursor = self.conn.cursor()
 		try:

@@ -25,8 +25,9 @@ class CategoriesHandler(BaseHandler):
 	def post(self):
 		#category_json = json.loads(self.request.body)
 		#category = category_json.get("category")
-		category = json.loads(self.request.body)
-		cname = category.get('cname')
+		
+		#category = json.loads(self.request.body)
+		cname = self.get_argument('cname')
 
 		cursor = self.conn.cursor()
 		try:
@@ -60,9 +61,9 @@ class CategoryHandler(BaseHandler):
 		#category_json = json.loads(self.request.body)
 		#category = category_json.get('category')
 		
-		category = json.loads(self.request.body)
-		cname = category.get('cname')
-		nid = category.get('nid')
+		#category = json.loads(self.request.body)
+		cname = self.get_argument('cname')
+		nid = self.get_argument('nid')
 		cursor = self.conn.cursor()
 
 		'''should check the id is available'''

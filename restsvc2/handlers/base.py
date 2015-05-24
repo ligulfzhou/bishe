@@ -19,18 +19,19 @@ class BaseHandler(tornado.web.RequestHandler):
 		if auth_header is None or not auth_header.startswith('Basic '):
 			return None
 		auth_decoded = base64.decodestring(auth_header[6:])
-		username, password = auth_decoded.split(':', 2)
+		email, password = auth_decoded.split(':', 2)
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, nrole from tbusers \
-				where cname='{0}' and cpassword='{1}'".format(username, password))
+			cursor.execute("select nid, cemail, cname, nrole from tbusers \
+				where cemail='{0}' and cpassword='{1}'".format(email, password))
 		except:
 			raise HTTPError(500, "db error")
 		if cursor.rowcount > 0:
 			userinfo = cursor.fetchone()
 			cursor.close()
 			return {"nid":userinfo[0],
-					"cname":userinfo[1],
-					"nrole":userinfo[2]}
+					"cemail":userinfo[1],
+					"cname":userinfo[2],
+					"nrole":userinfo[3]}
 		else:
 			return None
