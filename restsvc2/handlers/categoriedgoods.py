@@ -11,7 +11,7 @@ class CategoriedGoodsHandler(BaseHandler):
 	def get(self, id, goods=True):
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, fprice, cdesc, ncategoryid, ncount \
+			cursor.execute("select nid, cname, dprice, cdesc, ncategoryid, ncount \
 				from tbgoods where ncategoryid={0}".format(id))
 		except:
 			raise HTTPError(500)
@@ -19,7 +19,7 @@ class CategoriedGoodsHandler(BaseHandler):
 		goods_json = [{
 			'nid':good[0],
 			'cname':good[1],
-			'fprice':good[2],
+			'dprice':good[2],
 			'cdesc':good[3],
 			'ncategoryid':good[4],
 			'ncount':good[5]} 
