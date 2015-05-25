@@ -22,7 +22,7 @@ class CategoriedGoodsHandler(BaseHandler):
 			'fprice':good[2],
 			'cdesc':good[3],
 			'ncategoryid':good[4],
-			'nount':good[5]} 
+			'ncount':good[5]} 
 			for good in goods]
 		return self.write(json_encode({
 			'goods':goods_json
