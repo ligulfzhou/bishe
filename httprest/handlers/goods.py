@@ -11,14 +11,14 @@ class GoodsHandler(BaseHandler):
 	def get(self):
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, fprice, cdesc, ncategoryid, ncount from tbgoods")
+			cursor.execute("select nid, cname, dprice, cdesc, ncategoryid, ncount from tbgoods")
 		except:
 			raise HTTPError(500)
 		goods = cursor.fetchall()
 		goods_json = [{
 			'nid':good[0],
 			'cname':good[1],
-			'fprice':good[2],
+			'dprice':good[2],
 			'cdesc':good[3],
 			'ncategoryid':good[4],
 			'ncount':good[5]} 
@@ -34,7 +34,7 @@ class GoodsHandler(BaseHandler):
 		
 		#good = json.loads(self.request.body)
 		cname = self.get_argument('cname')
-		fprice = self.get_argument('fprice')
+		dprice = self.get_argument('dprice')
 		cdesc = self.get_argument('cdesc')
 		ncategoryid = self.get_argument('ncategoryid')
 		nount = self.get_argument('ncount')
@@ -42,14 +42,14 @@ class GoodsHandler(BaseHandler):
 		cursor = self.conn.cursor()
 		''' check available is omitted '''
 		try:
-			cursor.execute("insert into tbgoods (cname, fprice, cdesc, ncategoryid, ncount) \
-				values ('{0}', {1}, '{2}', {3}, {4}) returning nid".format(cname, fprice, cdesc, ncategoryid, ncount))
+			cursor.execute("insert into tbgoods (cname, dprice, cdesc, ncategoryid, ncount) \
+				values ('{0}', {1}, '{2}', {3}, {4}) returning nid".format(cname, dprice, cdesc, ncategoryid, ncount))
 		except:
 			raise HTTPError(500)
 		nid = cursor.fetchone()
 		self.conn.commit()
 		try:
-			cursor.execute("select nid, cname, fprice, cdesc, ncategoryid, ncount \
+			cursor.execute("select nid, cname, dprice, cdesc, ncategoryid, ncount \
 				from tbgoods where nid={0}".format(nid))
 		except:
 			raise HTTPError(500)
@@ -60,7 +60,7 @@ class GoodsHandler(BaseHandler):
 				"good":{
 					'nid':goodinfo[0],
 					'cname':goodinfo[1],
-					'fprice':goodinfo[2],
+					'dprice':goodinfo[2],
 					'cdesc':goodinfo[3],
 					'ncategoryid':goodinfo[4],
 					'ncount':goodinfo[5]}
@@ -72,7 +72,7 @@ class GoodHandler(BaseHandler):
 	def get(self, id):
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, cname, fprice, cdesc, ncategoryid, ncount \
+			cursor.execute("select nid, cname, dprice, cdesc, ncategoryid, ncount \
 				from tbgoods where nid={0}".format(id))
 		except:
 			raise HTTPError(500)
@@ -81,7 +81,7 @@ class GoodHandler(BaseHandler):
 		return self.write(json_encode({
 			'nid':goodinfo[0],
 			'cname':goodinfo[1],
-			'fprice':goodinfo[2],
+			'dprice':goodinfo[2],
 			'cdesc':goodinfo[3],
 			'ncategoryid':goodinfo[4],
 			'nount':goodinfo[5]
@@ -95,15 +95,15 @@ class GoodHandler(BaseHandler):
 		
 		#good = json.loads(self.request.body)
 		cname = self.get_argument('cname')
-		fprice = self.get_argument('fprice')
+		dprice = self.get_argument('dprice')
 		cdesc = self.get_argument('cdesc')
 		ncategoryid = self.get_argument('ncategoryid')
 		nount = self.get_argument('ncount')
 
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("update tbgoods set cname={0}, fprice={1}, cdesc='{2}', ncategoryid={3}, \
-				ncount={4} where nid={5}".format(cname, fprice, cdesc, ncategoryid, ncount, id))
+			cursor.execute("update tbgoods set cname={0}, dprice={1}, cdesc='{2}', ncategoryid={3}, \
+				ncount={4} where nid={5}".format(cname, dprice, cdesc, ncategoryid, ncount, id))
 		except:
 			raise HTTPError(500)
 		self.conn.commit()

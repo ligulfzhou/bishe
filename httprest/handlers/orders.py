@@ -13,12 +13,12 @@ class OrdersHandler(BaseHandler):
 		userid = self.current_user['nid']
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, dcreate_at, ftotal from tborders where nuser_id={0}".format(userid))
+			cursor.execute("select nid, dcreate_at, dtotal from tborders where nuser_id={0}".format(userid))
 		except:
 			raise HTTPError(500)
 		if cursor.rowcount > 0:
 			orders = cursor.fetchall()
-			orders_json = [{'nid':order[0], 'dcreate_at':time.mktime(order[1].timetuple()),'ftotal':order[2]} for order in orders]
+			orders_json = [{'nid':order[0], 'dcreate_at':time.mktime(order[1].timetuple()),'dtotal':order[2]} for order in orders]
 			return self.write(json_encode({
 				'orders':orders_json
 				}))
@@ -32,7 +32,7 @@ class OrdersHandler(BaseHandler):
 	def post(self):
 		'''
 		orderinfo {
-			'ftotal':
+			'dtotal':
 			'orderitems': [
 				'ngood_id'
 				'ncount':
@@ -41,13 +41,13 @@ class OrdersHandler(BaseHandler):
 		'''
 		userid = self.current_user['nid']     # current user id
 		#orderinfo = json.loads(self.request.body)
-		ftotal = self.get_argument('ftotal')
+		dtotal = self.get_argument('dtotal')
 		orderitems = self.get_argument('orderitems')
 
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("insert into tborders (ftotal, nuser_id) \
-				values ({0}, {1}) returning nid".format(ftotal, userid))
+			cursor.execute("insert into tborders (dtotal, nuser_id) \
+				values ({0}, {1}) returning nid".format(dtotal, userid))
 		except:
 			raise HTTPError(500)
 		orderid = cursor.fetchone()[0]
@@ -71,7 +71,7 @@ class OrderHandler(BaseHandler):
 			userid = self.current_user['nid']
 			cursor = self.conn.cursor()
 			try:
-				cursor.execute("select nid, ncreate_at, nuser_id, ftotal, nhandlered \
+				cursor.execute("select nid, ncreate_at, nuser_id, dtotal, nhandlered \
 					from tborders where nid={0}".format(id))
 			except:
 				raise HTTPError(500)
@@ -87,12 +87,12 @@ class OrderHandler(BaseHandler):
 					'nid':orderinfo[0],
 					'ncreate_at':time.mktime(orderinfo[1].timetuple()),
 					'nuser_id':orderinfo[2],
-					'ftotal':orderinfo[3],
+					'dtotal':orderinfo[3],
 					'nhandlered':orderinfo[4]}
 				}))
 		else:
 			try:
-				cursor.execute("select nid, ncreate_at, nuser_id, ftotal, nhandlered \
+				cursor.execute("select nid, ncreate_at, nuser_id, dtotal, nhandlered \
 					from tborders where nid={0}".format(id))
 			except:
 				raise HTTPError(500)
@@ -104,7 +104,7 @@ class OrderHandler(BaseHandler):
 					'nid':orderinfo[0],
 					'ncreate_at':time.mktime(orderinfo[1].timetuple()),
 					'nuser_id':orderinfo[2],
-					'ftotal':orderinfo[3],
+					'dtotal':orderinfo[3],
 					'nhandlered':orderinfo[4]}
 				}))
 
@@ -117,7 +117,7 @@ class OrderHandler(BaseHandler):
 		userid = self.current_user['nid']
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, ncreate_at, nuser_id, ftotal, nhandlered \
+			cursor.execute("select nid, ncreate_at, nuser_id, dtotal, nhandlered \
 				from tborders where nid={0}".format(id))
 		except:
 			raise HTTPError(500)
@@ -138,7 +138,7 @@ class OrderHandler(BaseHandler):
 		userid = self.current_user['nid']
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, ncreate_at, nuser_id, ftotal, nhandlered \
+			cursor.execute("select nid, ncreate_at, nuser_id, dtotal, nhandlered \
 				from tborders where nid={0}".format(id))
 		except:
 			raise HTTPError(500)
