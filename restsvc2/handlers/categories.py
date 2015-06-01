@@ -17,6 +17,7 @@ class CategoriesHandler(BaseHandler):
 		categories = cursor.fetchall()
 		categories_json = [{"nid":category[0], "cname":category[1]} for category in categories]
 		cursor.close()
+		self.set_header('Access-Control-Allow-Origin', '*')
 		return self.write(json_encode({
 				"categories":categories_json
 			}))
