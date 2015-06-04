@@ -24,9 +24,11 @@ class CategoriedGoodsHandler(BaseHandler):
 			'ncategoryid':good[4],
 			'ncount':good[5]} 
 			for good in goods]
-		return self.write(json_encode({
-			'goods':goods_json
-			}))
+		# return self.write(json_encode({
+		# 	'goods':goods_json
+		# 	}))
+		return self.write(json.dumps(goods_json))
+
 '''
 	@admin_required
 	def post(self, id, goods=True):

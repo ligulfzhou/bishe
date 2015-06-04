@@ -23,9 +23,10 @@ class GoodsHandler(BaseHandler):
 			'ncategoryid':good[4],
 			'ncount':good[5]} 
 			for good in goods]
-		return self.write(json_encode({
-			'goods':goods_json
-			}))
+		# return self.write(json_encode({
+		# 	'goods':goods_json
+		# 	}))
+		return self.write(json.dumps(goods_json))
 
 	@admin_required
 	def post(self):
@@ -56,14 +57,22 @@ class GoodsHandler(BaseHandler):
 		if cursor.rowcount > 0:
 			goodinfo = cursor.fetchone()
 			cursor.close()
-			return self.write(json_encode({
-				"good":{
+			# return self.write(json_encode({
+			# 	"good":{
+			# 		'nid':goodinfo[0],
+			# 		'cname':goodinfo[1],
+			# 		'dprice':goodinfo[2],
+			# 		'cdesc':goodinfo[3],
+			# 		'ncategoryid':goodinfo[4],
+			# 		'ncount':goodinfo[5]}
+			# 	}))
+			return self.write(json.dumps({
 					'nid':goodinfo[0],
 					'cname':goodinfo[1],
 					'dprice':goodinfo[2],
 					'cdesc':goodinfo[3],
 					'ncategoryid':goodinfo[4],
-					'ncount':goodinfo[5]}
+					'ncount':goodinfo[5]
 				}))
 
 

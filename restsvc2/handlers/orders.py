@@ -23,6 +23,7 @@ class OrdersHandler(BaseHandler):
 				'orders':orders_json
 				}))
 		else:
+			self.set_header(404)
 			return self.write(json_encode({
 				'orders':None
 				}))

@@ -18,9 +18,12 @@ class CategoriesHandler(BaseHandler):
 		categories_json = [{"nid":category[0], "cname":category[1]} for category in categories]
 		cursor.close()
 		self.set_header('Access-Control-Allow-Origin', '*')
-		return self.write(json_encode({
-				"categories":categories_json
-			}))
+		# return self.write(json_encode({
+		# 		#"categories":categories_json
+		# 		categories_json
+		# 	}))
+		return self.write(json.dumps(categories_json))
+
 
 	@admin_required
 	def post(self):
@@ -51,10 +54,14 @@ class CategoryHandler(BaseHandler):
 		if cursor.rowcount > 0:
 			category = cursor.fetchone()
 			cursor.close()
-			return self.write(json_encode({
-				"category":{
-					"nid":category[0],
-					"cname":category[1]}
+			# return self.write(json_encode({
+			# 	"category":{
+			# 		"nid":category[0],
+			# 		"cname":category[1]}
+			# 	}))
+			return self.write(json.dumps({
+				"nid":category[0],
+				"cname":category[1]
 				}))
 
 	@admin_required
