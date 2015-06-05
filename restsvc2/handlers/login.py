@@ -11,15 +11,15 @@ from utils import admin_required, login_required
 class LoginHandler(BaseHandler):
 
 	def post(self):
-		userinfo_json = json.loads(self.request.body)
+		# userinfo_json = json.loads(self.request.body)
 		# userinfo = userinfo_json.get("user")
 		# userinfo = json.loads(self.request.body)
 		# print userinfo
-		email = userinfo_json.get("email")
-		password = userinfo_json.get("password")
+		# email = userinfo_json.get("email")
+		# password = userinfo_json.get("password")
 
-		# email = self.get_argument('email', "lalala")
-		# password = self.get_argument('password', "lalalalala")
+		email = self.get_argument('email', "lalala")
+		password = self.get_argument('password', "lalalalala")
 
 		cursor = self.conn.cursor()
 		try:
