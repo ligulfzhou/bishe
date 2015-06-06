@@ -31,7 +31,7 @@ class LoginHandler(BaseHandler):
 			user = cursor.fetchone()
 			cursor.close()
 			return self.write(json_encode({
-				"user":{
+				'Session':{
 					'nid' : user[0],
 					'cemail' : user[1],
 					'cname' : user[2],
