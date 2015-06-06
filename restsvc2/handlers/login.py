@@ -31,13 +31,12 @@ class LoginHandler(BaseHandler):
 			user = cursor.fetchone()
 			cursor.close()
 			return self.write(json_encode({
-				'Session':{
 					'nid' : user[0],
 					'cemail' : user[1],
 					'cname' : user[2],
 					'dcreate_at' : time.mktime(user[3].timetuple()), 
 					'nrole' : user[4],
-					'token' : base64.encodestring("{0}:{1}".format(email, password))}
+					'token' : base64.encodestring("{0}:{1}".format(email, password))
 				}))
 		else:
 			raise HTTPError(401, 'un authenrized')
