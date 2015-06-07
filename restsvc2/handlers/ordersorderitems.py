@@ -26,13 +26,16 @@ class OrdersOrderitemsHandler(BaseHandler):
 								'ngood_id':orderitem[1],
 								'ncount':orderitem[2]}
 								for orderitem in orderitems]
-			return self.write(json_encode({
-					'orderitems':orderitems_json
-				}))
+			# return self.write(json_encode({
+			# 		'orderitems':orderitems_json
+			# 	}))
+			return self.write(json.dumps(orderitems_json))
 		else:
-			return self.write(json_encode({
-					'orderitems': None
-				}))
+			# return self.write(json_encode({
+			# 		'orderitems': None
+			# 	}))
+			return self.write(json.dumps([]))
+
 
 class OrdersOrderitemHandler(BaseHandler):
 
@@ -51,10 +54,9 @@ class OrdersOrderitemHandler(BaseHandler):
 			orderitems = cursor.fetchone()
 			cursor.clone()
 			return self.write(json_encode({
-					"orderitem":{
 						'nid':orderitem[0],
 						'ngood_id':orderitem[1],
-						'ncount':orderitem[2]}
+						'ncount':orderitem[2]
 					}))
 		else:
 			return self.write(json_encode({

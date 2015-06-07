@@ -13,20 +13,26 @@ class OrdersHandler(BaseHandler):
 		userid = self.current_user['nid']
 		cursor = self.conn.cursor()
 		try:
-			cursor.execute("select nid, dcreate_at, dtotal from tborders where nuser_id={0}".format(userid))
+			cursor.execute("select nid, dcreate_at, dtotal from tborders \
+							where nuser_id={0}".format(userid))
 		except:
 			raise HTTPError(500)
 		if cursor.rowcount > 0:
 			orders = cursor.fetchall()
-			orders_json = [{'nid':order[0], 'dcreate_at':time.mktime(order[1].timetuple()),'dtotal':order[2]} for order in orders]
-			return self.write(json_encode({
-				'orders':orders_json
-				}))
+			orders_json = [{'nid':order[0], 
+							'dcreate_at':time.mktime(order[1].timetuple()),
+							'dtotal':order[2]} 
+							for order in orders]
+			# return self.write(json_encode({
+			# 	'orders':orders_json
+			# 	}))
+			return self.write(json.dumps(orders_json))
 		else:
-			self.set_header(404)
-			return self.write(json_encode({
-				'orders':None
-				}))
+			# self.set_status(404)
+			# return self.write(json_encode({
+			# 	'orders':None
+			# 	}))
+			return self.write(json.dumps([]))
 
 
 	@login_required
@@ -39,6 +45,10 @@ class OrdersHandler(BaseHandler):
 				'ncount':
 			]
 		}
+		dtotal maybe fake,
+		omit the dtotal,
+
+		just post [{ngoodid, ncount}, {ngoodid, ncount}, {ngoodid, ncount}]
 		'''
 		userid = self.current_user['nid']     # current user id
 		#orderinfo = json.loads(self.request.body)
@@ -84,12 +94,11 @@ class OrderHandler(BaseHandler):
 				raise HTTPError(403)
 
 			return self.write(json_encode({
-				"order":{
 					'nid':orderinfo[0],
 					'ncreate_at':time.mktime(orderinfo[1].timetuple()),
 					'nuser_id':orderinfo[2],
 					'dtotal':orderinfo[3],
-					'nhandlered':orderinfo[4]}
+					'nhandlered':orderinfo[4]
 				}))
 		else:
 			try:
@@ -101,12 +110,11 @@ class OrderHandler(BaseHandler):
 			cursor.close()
 
 			return self.write(json_encode({
-				"order":{
 					'nid':orderinfo[0],
 					'ncreate_at':time.mktime(orderinfo[1].timetuple()),
 					'nuser_id':orderinfo[2],
 					'dtotal':orderinfo[3],
-					'nhandlered':orderinfo[4]}
+					'nhandlered':orderinfo[4]
 				}))
 
 	'''

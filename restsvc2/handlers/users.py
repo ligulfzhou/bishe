@@ -24,10 +24,10 @@ class UsersHandler(BaseHandler):
 						#'dcreate_at':user[2],
 						'dcreate_at':time.mktime(user[3].timetuple()),
 						'nrole':user[4]} for user in users]
-		return self.write(json_encode({
-			'users':users_json
-			}))
-
+		# return self.write(json_encode({
+		# 	'users':users_json
+		# 	}))
+		return self.write(json.dumps(users_json))
 
 	''' register user '''
 	def post(self):
@@ -59,13 +59,11 @@ class UsersHandler(BaseHandler):
 					raise HTTPError(500)
 				user = cursor.fetchone()
 				return self.write(json_encode({
-					'user':{
 							'nid':user[0],
 							'cemail':user[1],
 							'cname':user[2],
 							#'dcreate_at':user[2].
 							'dcreate_at':time.mktime(user[3].timetuple())
-							}
 					}))
 			else:
 				raise HTTPError(500)
@@ -91,13 +89,12 @@ class UserHandler(BaseHandler):
 			user = cursor.fetchone()
 			cursor.close()		
 			return self.write(json_encode({
-				"user":{
 					'nid':user[0],
 					'cemail':user[1],
 					'cname':user[2],
 					#'ccreate_at':user[2],
 					'dcreate_at':time.mktime(user[3].timetuple()),
-					'nrole':user[4]}
+					'nrole':user[4]
 				}))
 		else:										# admin role
 			try:
@@ -108,13 +105,12 @@ class UserHandler(BaseHandler):
 			user = cursor.fetchone()
 			cursor.close()		
 			return self.write(json_encode({
-				"user":{
 					'nid':user[0],
 					'cemail':user[1],
 					'cname':user[2],
 					#'ccreate_at':user[2],
 					'dcreate_at':time.mktime(user[3].timetuple()),
-					'nrole':user[4]}
+					'nrole':user[4]
 				}))
 
 

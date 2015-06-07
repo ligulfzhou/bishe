@@ -19,10 +19,12 @@ class UsersOrdersHandler(BaseHandler):
 		if cursor.rowcount > 0:
 			orders = cursor.fetchall()
 			orders_json = [{'nid':order[0], 'dcreate_at':time.mktime(order[1].timetuple()),'dtotal':order[2]} for order in orders]
-			return self.write(json_encode({
-				'orders':orders_json
-				}))
+			# return self.write(json_encode({
+			# 	'orders':orders_json
+			# 	}))
+			return self.write(json.dumps(orders_json))
 		else:
-			return self.write(json_encode({
-				'orders':None
-				}))
+			# return self.write(json_encode({
+			# 	'orders':None
+			# 	}))
+			return self.write(json.dumps([]))
