@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/header_height"
+    android:background="@color/tab_main_color" >
+
+    <TextView
+        android:id="@+id/text_title"
+        style="@style/Text.Title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/button_backward"
+        style="@style/Text.Title_Button"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/button_backward_selector"
+        android:drawableLeft="@drawable/back_arrow"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:paddingLeft="@dimen/table_margin"
+        android:text="@string/button_backward"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_forward"
+        style="@style/Text.Title_Button"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_backward_selector"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:paddingRight="@dimen/table_margin"
+        android:text="@string/button_submit"
+        android:visibility="invisible" />
+
+</RelativeLayout>

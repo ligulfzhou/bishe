@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">bisheclient</string>
+
+    <string name="text_account">账号与安全</string>
+    <string name="text_notification">通知与消息</string>
+    <string name="text_privacy">隐私</string>
+    <string name="text_general">通用</string>
+    <string name="text_about">关于去哪考</string>
+    <string name="button_backward">返回</string>
+    <string name="button_submit">提交</string>
+    <string name="text_age">年龄</string>
+    <string name="text_gender">性别</string>
+    <string name="text_username">用户名</string>
+    <string name="text_nickname">昵称</string>
+    <string name="text_place">地区</string>
+    <string name="text_learning">我想学/考</string>
+    <string name="text_education">学历层次</string>
+    <string name="text_speciality">专业</string>
+    <string name="text_credit">我的积分</string>
+    <string name="text_official_website">官方网站</string>
+    <string name="text_rate_app">去评分</string>
+    <string name="text_about_help">帮助</string>
+    <string name="text_about_feedback">反馈</string>
+    <string name="text_about_update">检查更新</string>
+    <string name="text_company">启鸣科技</string>
+    <string name="text_copyright">Copyright © 2014-2020 Shizhenbao All Rights Reserved.</string>
+    <string name="text_exit">退 出</string>
+
+    <string name="categoriedgoods">categoried goods</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="action_settings">Settings</string>
+
+
+
+    <string name="button_login">登录</string>
+
+    <string name="title_activity_query_room">QueryRoomActivity</string>
+    <string name="text_tab_fundmanagement">资金管理</string>
+    <string name="text_tab_sitesetting">网站设置</string>
+    <string name="text_tab_dataanalysemanagement">数据管理</string>
+    <string name="text_tab_gamemanagement">游戏管理</string>
+    <string name="text_tab_roommanagement">房间管理</string>
+    <string name="text_tab_usermanagement">用户管理</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_queryuser">用户查询</string>
+    <string name="text_create_one_user">单一开号</string>
+    <string name="text_membersetting">会员设置</string>
+    <string name="text_user_right">用户权限</string>
+    <string name="text_reset_password">重置密码</string>
+    <string name="text_clear_password_protect">清空密保</string>
+    <string name="text_manage_fenhao">封号管理</string>
+    <string name="title_activity_query_user">QueryUserActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_create_one_user">CreateOneUserActivity</string>
+    <string name="title_activity_member_setting">MemberSettingActivity</string>
+    <string name="title_activity_user_right">UserRightActivity</string>
+    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="title_activity_clear_password_protext">ClearPasswordProtextActivity</string>
+    <string name="title_activity_manage_fenhao">ManageFenhaoActivity</string>
+    <string name="title_activity_ppc_log">PpcLogActivity</string>
+    <string name="text_ppclog">车行押注查询</string>
+    <string name="text_query_room">房间查询</string>
+    <string name="text_add_room">添加房间</string>
+    <string name="text_manage_group">分区管理</string>
+    <string name="title_activity_add_room">AddRoomActivity</string>
+    <string name="title_activity_manage_group">ManageGroupActivity</string>
+    <string name="text_query_user_money_flow">用户流水查询</string>
+    <string name="text_freeze_user_gift">用户礼金冻结</string>
+    <string name="title_activity_query_user_money_flow">QueryUserMoneyFlowActivity</string>
+    <string name="text_site_fund_manage">网站资金管理</string>
+    <string name="text_site_accout_flow">网站账户流水</string>
+    <string name="text_user_cash_flow">现金消费流水</string>
+    <string name="title_activity_freeze_user_gift">FreezeUserGiftActivity</string>
+    <string name="title_activity_site_fund_manage">SiteFundManageActivity</string>
+    <string name="title_activity_site_account_flow">SiteAccountFlowActivity</string>
+    <string name="title_activity_user_cash_flow">UserCashFlowActivity</string>
+    <string name="text_room_popularity">房间人气查询</string>
+    <string name="text_wealth_star">财富之星查询</string>
+    <string name="text_user_mic_time">在麦时间查询</string>
+    <string name="title_activity_shuahua">ShuahuaActivity</string>
+    <string name="title_activity_room_popularity">RoomPopularityActivity</string>
+    <string name="text_shuhua_time">刷花统计查询</string>
+    <string name="title_activity_wealth_star">WealthStarActivity</string>
+    <string name="title_activity_user_mic_time">UserMicTimeActivity</string>
+    <string name="text_image_ad">图片轮播</string>
+    <string name="text_system_message">系统消息</string>
+    <string name="text_change_password">修改密码</string>
+    <string name="title_activity_image_ad">ImageAdActivity</string>
+    <string name="title_activity_system_message">SystemMessageActivity</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_category_book">CategoryBookActivity</string>
+    <string name="title_activity_category_computer">CategoryComputerActivity</string>
+    <string name="title_activity_category_mobile_phone">CategoryMobilePhoneActivity</string>
+    <string name="title_activity_category_mp3">CategoryMp3Activity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_goods">GoodsActivity</string>
+
+</resources>

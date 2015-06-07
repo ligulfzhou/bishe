@@ -1,0 +1,82 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0" >
+
+        <Button
+            android:id="@+id/button_state1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_message_selector"
+            android:gravity="center"
+            android:singleLine="true"
+            android:tag="myinfo"
+            android:text="个人信息"
+            android:textColor="@color/text_service_color"
+            android:textSize="14dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0" >
+
+        <Button
+            android:id="@+id/button_state2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_service_selector"
+            android:gravity="center"
+            android:singleLine="true"
+            android:tag="categorys"
+            android:text="类别"
+            android:textColor="@color/text_service_color"
+            android:textSize="14dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0" >
+
+        <Button
+            android:id="@+id/button_state3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_profile_selector"
+            android:gravity="center"
+            android:singleLine="true"
+            android:tag="myorders"
+            android:text="我的订单"
+            android:textColor="@color/text_service_color"
+            android:textSize="14dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0" >
+
+        <Button
+            android:id="@+id/button_state4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_setting_selector"
+            android:gravity="center"
+            android:singleLine="true"
+            android:tag="shoppingcart"
+            android:text="购物车"
+            android:textColor="@color/text_service_color"
+            android:textSize="14dp" />
+    </FrameLayout>
+</merge>

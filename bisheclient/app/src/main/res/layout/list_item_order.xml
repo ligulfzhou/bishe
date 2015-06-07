@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_listview_item_order_orderid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="orderid" />
+
+    <TextView
+        android:id="@+id/tv_listview_item_order_ordercreate_at"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="create_at"/>
+
+    <TextView
+        android:id="@+id/tv_listview_item_order_order_total"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="total"/>
+
+    <TextView
+        android:id="@+id/tv_listview_item_order_orderhandlred"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="handlered"/>
+
+</LinearLayout>

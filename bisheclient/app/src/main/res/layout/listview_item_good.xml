@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_listview_item_good_goodidid"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="goodid"/>
+    <TextView
+        android:id="@+id/tv_listview_item_good_goodname"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="goodname"/>
+    <TextView
+        android:id="@+id/tv_listview_item_good_goodprice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="goodprice"/>
+
+    <TextView
+        android:id="@+id/tv_listview_item_good_gooddesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="gooddesc"/>
+
+    <TextView
+        android:id="@+id/tv_listview_item_good_goodcategoryid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="goodcategoryid"/>
+
+    <TextView
+        android:id="@+id/tv_listview_item_good_goodcount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="goodcount"/>
+
+</LinearLayout>
