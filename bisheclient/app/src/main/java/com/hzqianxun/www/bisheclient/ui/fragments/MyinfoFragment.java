@@ -2,7 +2,6 @@ package com.hzqianxun.www.bisheclient.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,21 +36,19 @@ public class MyinfoFragment extends BaseFragment {
     Button btn_logout;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.v("test appcontext", AppContext.getInstance().getLoginInfo().getUseremail());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_myinfo, container, false);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        View v = inflater.inflate(R.layout.fragment_myinfo, container, false);
-
-        tv_username = (TextView)v.findViewById(R.id.tv_username);
-        tv_email = (TextView) v.findViewById(R.id.tv_email);
-        tv_register_time = (TextView) v.findViewById(R.id.tv_register_time);
-        btn_logout = (Button) v.findViewById(R.id.btn_logout);
+        tv_username = (TextView) getView().findViewById(R.id.tv_username);
+        tv_email = (TextView) getView().findViewById(R.id.tv_email);
+        tv_register_time = (TextView) getView().findViewById(R.id.tv_register_time);
+        btn_logout = (Button) getView().findViewById(R.id.btn_logout);
 
         tv_username.setText(AppContext.getInstance().getProperty(PROP_KEY_NAME));
         tv_email.setText(AppContext.getInstance().getProperty(PROP_KEY_EMAIL));
@@ -66,10 +63,9 @@ public class MyinfoFragment extends BaseFragment {
                 logout();
             }
         });
-
-//        return inflater.inflate(R.layout.fragment_myinfo, container, false);
-        return v;
     }
+
+
     private void logout(){
         AppContext.getInstance().logout();
 

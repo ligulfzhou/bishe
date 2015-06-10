@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.hzqianxun.www.bisheclient.R;
 import com.hzqianxun.www.bisheclient.bean.GoodInCart;
+import com.hzqianxun.www.bisheclient.viewholder.GoodInCartHolder;
 
 import java.util.List;
 
@@ -22,13 +23,13 @@ public class GoodInCartAdapter extends ArrayAdapter<GoodInCart>{
     int layoutResourceId;
     GoodInCart[] data;
 
+
     public GoodInCartAdapter(Context context, int layoutResourceId, GoodInCart[] data) {
         super(context, layoutResourceId, data);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.data = data;
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -53,9 +54,5 @@ public class GoodInCartAdapter extends ArrayAdapter<GoodInCart>{
         holder.tv_count.setText(Integer.toString(goodInCart.getNcount()));
 
         return row;
-    }
-    private class GoodInCartHolder{
-        TextView tv_goodid;
-        TextView tv_count;
     }
 }

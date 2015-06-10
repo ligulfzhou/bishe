@@ -25,7 +25,9 @@
         <!-- AppTheme -->
         <activity
             android:name=".ui.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="bisheclient" >
+
+            <!-- android:label="@string/title_activity_login" > -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,6 +41,10 @@
         <activity
             android:name=".ui.GoodsActivity"
             android:label="@string/title_activity_goods" >
+        </activity>
+        <activity
+            android:name=".ui.OrderActivity"
+            android:label="@string/title_activity_order" >
         </activity>
     </application>
 

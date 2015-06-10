@@ -99,5 +99,6 @@
     <string name="title_activity_category_mp3">CategoryMp3Activity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_goods">GoodsActivity</string>
+    <string name="title_activity_order">OrderActivity</string>
 
 </resources>

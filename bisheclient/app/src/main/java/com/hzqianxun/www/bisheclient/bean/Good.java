@@ -2,10 +2,12 @@ package com.hzqianxun.www.bisheclient.bean;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by ubuntu on 2015/5/25.
  */
-public class Good {
+public class Good implements Serializable{
 
     @JsonProperty("nid")
     private Integer goodid;

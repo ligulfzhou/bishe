@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.hzqianxun.www.bisheclient.R;
@@ -55,7 +54,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         }
 
         Category category = data[position];
-//        Category category = data.get(position);
+
         holder.tv_categoryid.setText((category.getCategoryid()).toString());
         holder.tv_categoryname.setText(category.getCategoryname());
 

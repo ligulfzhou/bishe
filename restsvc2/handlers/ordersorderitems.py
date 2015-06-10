@@ -8,6 +8,7 @@ from utils import admin_required, login_required
 
 class OrdersOrderitemsHandler(BaseHandler):
 
+	# get https://api_base/api/v1/orders/<int:orderid>/orderitems
 	@login_required
 	def get(self, orderid, orderitems=True):
 		cursor = self.conn.cursor()
@@ -15,13 +16,14 @@ class OrdersOrderitemsHandler(BaseHandler):
 			cursor.execute("select b.nid, b.ngood_id, b.ncount \
 							from tborders as a, \
 							tborderitems as b \
-							where b.norder_id=a.nid \
-							and a.user_id={0}".format(current_user.get("nid")))
+							where b.norder_id = a.nid \
+							and a.nuser_id={0}".format(self.current_user.get("nid")))
 		except:
 			raise HTTPError(500)
+
 		if cursor.rowcount > 0:
 			orderitems = cursor.fetchall()
-			cursor.clone()
+			cursor.close()
 			orderitems_json = [{'nid':orderitem[0],
 								'ngood_id':orderitem[1],
 								'ncount':orderitem[2]}
@@ -39,6 +41,7 @@ class OrdersOrderitemsHandler(BaseHandler):
 
 class OrdersOrderitemHandler(BaseHandler):
 
+	# get https://api_base/api/v1/orders/<int:orderid>/orderitems/<int:orderitemid>
 	@login_required
 	def get(self, orderid, orderitems, orderitemid):
 		cursor = self.conn.cursor()
@@ -47,7 +50,7 @@ class OrdersOrderitemHandler(BaseHandler):
 							from tborders as a, \
 							tborderitems as b \
 							where b.norder_id=a.nid \
-							and a.user_id={0} and b.nid={1}".format(current_user.get("nid"), orderitemid))
+							and a.user_id={0} and b.nid={1}".format(self.current_user.get("nid"), orderitemid))
 		except:
 			raise HTTPError(500)
 		if cursor.rowcount > 0:
@@ -59,6 +62,7 @@ class OrdersOrderitemHandler(BaseHandler):
 						'ncount':orderitem[2]
 					}))
 		else:
-			return self.write(json_encode({
-					'orderitem': None
-				}))
+			# return self.write(json_encode({
+			# 		'orderitem': None
+			# 	}))
+			return self.write(json.dumps([]))

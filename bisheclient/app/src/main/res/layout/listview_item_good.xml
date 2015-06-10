@@ -2,40 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物品id: "/>
+        <TextView
+            android:textColor="@android:color/black"
+            android:id="@+id/tv_listview_item_good_goodidid"
+            android:layout_marginRight="15dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="goodid"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物品名称: "/>
+        <TextView
+            android:textColor="@android:color/black"
+            android:id="@+id/tv_listview_item_good_goodname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="goodname"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格: "/>
+        <TextView
+            android:textColor="@android:color/black"
+            android:layout_marginRight="15dip"
+            android:id="@+id/tv_listview_item_good_goodprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="goodprice"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所属类: "/>
+        <TextView
+            android:textColor="@android:color/black"
+            android:layout_marginRight="15dip"
+            android:id="@+id/tv_listview_item_good_goodcategoryid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="goodcategoryid"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物品数量: "/>
+        <TextView
+            android:textColor="@android:color/black"
+
+            android:id="@+id/tv_listview_item_good_goodcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="goodcount"/>
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_listview_item_good_goodidid"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="goodid"/>
-    <TextView
-        android:id="@+id/tv_listview_item_good_goodname"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="goodname"/>
-    <TextView
-        android:id="@+id/tv_listview_item_good_goodprice"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="goodprice"/>
-
-    <TextView
+        android:textColor="@android:color/black"
         android:id="@+id/tv_listview_item_good_gooddesc"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="gooddesc"/>
-
-    <TextView
-        android:id="@+id/tv_listview_item_good_goodcategoryid"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="goodcategoryid"/>
-
-    <TextView
-        android:id="@+id/tv_listview_item_good_goodcount"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="goodcount"/>
 
 </LinearLayout>

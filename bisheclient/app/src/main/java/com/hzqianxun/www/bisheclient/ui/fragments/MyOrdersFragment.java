@@ -1,11 +1,15 @@
 package com.hzqianxun.www.bisheclient.ui.fragments;
 
-import android.graphics.drawable.AnimatedVectorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,12 +19,19 @@ import com.hzqianxun.www.bisheclient.R;
 import com.hzqianxun.www.bisheclient.adapter.OrderAdapter;
 import com.hzqianxun.www.bisheclient.api.RestApi;
 import com.hzqianxun.www.bisheclient.bean.Order;
+import com.hzqianxun.www.bisheclient.ui.OrderActivity;
 import com.hzqianxun.www.bisheclient.ui.basefragment.BaseFragment;
 import com.hzqianxun.www.bisheclient.utils.JsonUtils;
+import com.hzqianxun.www.bisheclient.viewholder.OrderHolder;
+import com.hzqianxun.www.bisheclient.viewholder.OrderitemHolder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.apache.http.Header;
+import static com.hzqianxun.www.bisheclient.common.Constant.ORDERID;
+import static com.hzqianxun.www.bisheclient.common.Constant.ORDER_CREATE_AT;
+import static com.hzqianxun.www.bisheclient.common.Constant.ORDER_HANDLERED;
+import static com.hzqianxun.www.bisheclient.common.Constant.ORDER_TOTAL;
 
+import org.apache.http.Header;
 import java.util.List;
 
 
@@ -35,6 +46,7 @@ import java.util.List;
 public class MyOrdersFragment extends BaseFragment {
 
     TextView tv_you_do_not_have_any_orders;
+    Button btn_refresh_orders;
     private ListView listView;
     List<Order> orders;
     OrderAdapter orderAdapter;
@@ -48,6 +60,11 @@ public class MyOrdersFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        helloworld();
+    }
+
+    private void helloworld(){
         RestApi.getOrders(1, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -64,8 +81,8 @@ public class MyOrdersFragment extends BaseFragment {
                 Toast.makeText(AppContext.getInstance(), "error", Toast.LENGTH_LONG).show();
             }
         });
-    }
 
+    }
     private void setNoOrders(){
         tv_you_do_not_have_any_orders = (TextView) getView().findViewById(R.id.tv_you_do_not_have_any_orders);
         tv_you_do_not_have_any_orders.setText("tv_you_do_not_have_any_orders");
@@ -77,5 +94,47 @@ public class MyOrdersFragment extends BaseFragment {
 
         listView = (ListView) getView().findViewById(R.id.listView_order);
         listView.setAdapter(orderAdapter);
+
+        // order list
+        // click every order listitem ,
+        // go to another activity to show the order info,
+        // especially the orderitems list
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                OrderHolder orderHolder = (OrderHolder) view.getTag();
+                String orderid = orderHolder.tv_orderid.getText().toString();
+                String total  = orderHolder.tv_order_total.getText().toString();
+                String create_at = orderHolder.tv_order_create_at.getText().toString();
+                String handlered = orderHolder.tv_order_handlered.getText().toString();
+
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(ORDERID, orderid);
+                bundle.putString(ORDER_CREATE_AT, create_at);
+                bundle.putString(ORDER_HANDLERED, handlered);
+                bundle.putString(ORDER_TOTAL, total);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+
+//                Toast.makeText(AppContext.getInstance(), "you want to know more about this order info", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //just setup view again -> just call helloworld()
+        btn_refresh_orders = (Button) getView().findViewById(R.id.btn_refresh_orders);
+        btn_refresh_orders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helloworld();
+            }
+        });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

@@ -3,7 +3,6 @@ package com.hzqianxun.www.bisheclient.ui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,6 @@ public class CategoryFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         RestApi.getCategories(1, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -85,7 +83,7 @@ public class CategoryFragment extends BaseFragment {
                 CategoryHolder categoryHolder = (CategoryHolder)view.getTag();
                 int categoryid = Integer.parseInt(categoryHolder.tv_categoryid.getText().toString());
                 String categoryname = categoryHolder.tv_categoryname.getText().toString();
-                Toast.makeText(AppContext.getInstance(), Integer.toString(categoryid), Toast.LENGTH_LONG).show();
+
 
                 //according to the categoryid to go to another activity
                 //and get the according goods

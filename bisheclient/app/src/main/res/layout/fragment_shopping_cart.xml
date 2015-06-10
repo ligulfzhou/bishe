@@ -1,10 +1,45 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="app.ui.fragment.ShoppingCartFragment">
-
-    <ListView
-        android:id="@+id/listView_goodincart"
-        android:layout_width="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="app.ui.fragment.ShoppingCartFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </ListView>
-</FrameLayout>
+
+        <ListView
+            android:id="@+id/listView_goodincart"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_refresh_cart"
+            android:text="refresh cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_clear_cart"
+            android:text="clear cart"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_make_order"
+            android:text="make order"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

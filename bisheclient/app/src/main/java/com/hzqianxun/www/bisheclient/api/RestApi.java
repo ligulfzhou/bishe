@@ -9,6 +9,13 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import static com.hzqianxun.www.bisheclient.api.AsyncHttpHelp.getHttpClient;
@@ -17,7 +24,9 @@ import static com.hzqianxun.www.bisheclient.api.AsyncHttpHelp.getHttpClient;
  */
 
 public class RestApi {
-    public final static String HOST = "120.26.36.78/";
+
+//    public final static String HOST = "120.26.36.78/";
+    public final static String HOST = "192.168.57.1/";
     private static final String API_VERSION = "api/v1/";
     public final static String HTTPS = "https://";
     public final static String BASE_URL = HTTPS + HOST + API_VERSION;
@@ -60,10 +69,58 @@ public class RestApi {
         Log.d("http", new StringBuilder("POST ").append(ORDERS).append("?").append(params).toString());
     }
 
-    public static void postMakeOrder(List<GoodInCart> goodInCarts, AsyncHttpResponseHandler handler){
+    public static void postMakeOrder(List<GoodInCart> goodInCarts, AsyncHttpResponseHandler handler) {
         AsyncHttpClient httpClient = getHttpClient();
 
         String token = AppContext.getInstance().getProperty(Constant.PROP_KEY_PRIVATE_TOKEN);
+        httpClient.addHeader("Authorization", "Basic " + token);
+
+        JSONArray jsonArray = new JSONArray();
+        JSONObject json;
+
+        for(int i = 0; i < goodInCarts.size(); i ++){
+            json = new JSONObject();
+
+            try {
+                json.put("ngoodid", goodInCarts.get(i).getNgoodid());
+                json.put("ncount", goodInCarts.get(i).getNcount());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonArray.put(json);
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("orderitems", jsonArray);
+//            jsonObject.put("dtotal", 1234);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ByteArrayEntity entity = null;
+        try {
+            entity = new ByteArrayEntity(jsonObject.toString().getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("post make order", entity.toString());
+
+//        httpClient.addHeader("Content-Length", jsonArray.toString().length());
+//        http
+        httpClient.post(AppContext.getInstance(), ORDERS, entity, "application/json", handler);
+    }
+
+    public static void getOrderOrderitems(int orderid, AsyncHttpResponseHandler handler){
+
+        String token = AppContext.getInstance().getProperty(Constant.PROP_KEY_PRIVATE_TOKEN);
+
+        AsyncHttpClient httpClient = getHttpClient();
+        httpClient.addHeader("Authorization", "Basic " + token);
+
+        httpClient.get(BASE_URL + "orders/" + orderid + "/orderitems", handler);
 
     }
 }

@@ -18,7 +18,6 @@ import com.hzqianxun.www.bisheclient.interfaces.FragmentCallback;
 import com.hzqianxun.www.bisheclient.utils.DialogUtils;
 import com.hzqianxun.www.bisheclient.utils.FragmentUtils;
 
-
 public class StartActivity extends FragmentActivity implements TabView.OnTabChangeListener, FragmentCallback {
 
     private FragmentManager mFragmentManager;
@@ -27,7 +26,7 @@ public class StartActivity extends FragmentActivity implements TabView.OnTabChan
     private TextView mTitleTextView;
 
     /** 上一次的状态 */
-    private int mPreviousTabIndex = 1;
+    private int mPreviousTabIndex;
     /** 当前状态 */
     private int mCurrentTabIndex = 1;
 
@@ -40,7 +39,7 @@ public class StartActivity extends FragmentActivity implements TabView.OnTabChan
         super.onCreate(savedInstanceState);
         mFragmentManager = getSupportFragmentManager();
         mCurrentTabIndex = 0;
-        mPreviousTabIndex = 0;
+        mPreviousTabIndex = 1;
         setupViews();
     }
     private void setupViews()

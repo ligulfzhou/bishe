@@ -12,7 +12,8 @@ setup(name='tornado_rest_api',
       classifiers=[],
       packages=find_packages(exclude=['tests']),
       install_requires=[
-          'tornado==4.1'
+            'psycopg2',
+            'tornado==4.2'
       ],
       tests_require=[
           'psycopg2',

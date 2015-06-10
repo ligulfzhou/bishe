@@ -16,6 +16,11 @@ public class Constant {
     public static final String PROP_KEY_CREATE_AT = "user.create_at";
 
 
+    public static final String ORDERID = "order.nid";
+    public static final String ORDER_TOTAL = "order.dtotal";
+    public static final String ORDER_CREATE_AT = "order.dcreate_at";
+    public static final String ORDER_HANDLERED = "order.handlered";
+
     public static final String CATEGORYID = "categoryid";
     public static final String CATEGORYNAME = "categoryname";
 }

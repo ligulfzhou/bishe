@@ -12,5 +12,4 @@ public class GoodHolder {
     public TextView tv_gooddesc;
     public TextView tv_goodcategoryid;
     public TextView tv_goodcount;
-
 }

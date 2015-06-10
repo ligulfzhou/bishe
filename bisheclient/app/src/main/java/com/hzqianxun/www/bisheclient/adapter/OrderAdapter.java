@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.hzqianxun.www.bisheclient.R;
 import com.hzqianxun.www.bisheclient.bean.Order;
+import com.hzqianxun.www.bisheclient.viewholder.OrderHolder;
 
 /**
  * Created by ubuntu on 15-6-7.
@@ -50,17 +51,13 @@ public class OrderAdapter extends ArrayAdapter<Order>{
         Order order = data[position];
         holder.tv_orderid.setText(Integer.toString(order.getOrderid()));
         holder.tv_order_create_at.setText(Integer.toString(order.getCreate_at()));
-        holder.tv_order_total.setText(Double.toString(order.getTotal()));
+
+        String total = "0.00";
+        if (order.getTotal() != null)
+            total = Double.toString(order.getTotal());
+        holder.tv_order_total.setText(total);
         holder.tv_order_handlered.setText(Integer.toString(order.getHandlered()));
 
         return row;
     }
-
-    static class OrderHolder{
-        TextView tv_orderid;
-        TextView tv_order_create_at;
-        TextView tv_order_handlered;
-        TextView tv_order_total;
-    }
-
 }

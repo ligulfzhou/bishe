@@ -114,3 +114,9 @@ insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (13,
 insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (14, 'mac pro', 12000, 'fantastic', 4, 2000);
 insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (15, 'mac air', 8000, 'awesome', 4, 3000);
 insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (16, 'chromium', 3000, 'cheap', 4, 4000);
+
+-- 4: fake orders
+-- user1 one order 
+insert into tborders (nid, nuser_id, dtotal) values (1, 1, 70);
+insert into tborderitems (ngood_id, ncount, norder_id) values (1, 2, 1);
+insert into tborderitems (ngood_id, ncount, norder_id) values (2, 1, 1);
