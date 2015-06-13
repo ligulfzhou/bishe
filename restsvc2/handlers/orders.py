@@ -53,12 +53,8 @@ class OrdersHandler(BaseHandler):
 
 		just post [{ngoodid, ncount}, {ngoodid, ncount}, {ngoodid, ncount}]
 		'''
-
-
 		print self.request.body + "]}"
 		order_json = json.loads(self.request.body + "]}")
-
-
 
 		# dtotal = order_json.get("dtotal")
 		orderitems = order_json.get("orderitems")

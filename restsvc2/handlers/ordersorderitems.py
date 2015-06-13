@@ -17,7 +17,7 @@ class OrdersOrderitemsHandler(BaseHandler):
 							from tborders as a, \
 							tborderitems as b \
 							where b.norder_id = a.nid \
-							and a.nuser_id={0}".format(self.current_user.get("nid")))
+							and a.nuser_id={0} and a.nid = {1}".format(self.current_user.get("nid"), orderid))
 		except:
 			raise HTTPError(500)
 

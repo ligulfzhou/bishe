@@ -10,7 +10,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.contrib import admin
 
 class Tbcategories(models.Model):
     nid = models.IntegerField(primary_key=True)
@@ -19,6 +19,9 @@ class Tbcategories(models.Model):
     class Meta:
         managed = False
         db_table = 'tbcategories'
+
+class TbcategoriesAdmin(admin.ModelAdmin):
+    list_display = ('nid', 'cname')
 
 
 class Tbgoods(models.Model):
@@ -33,6 +36,9 @@ class Tbgoods(models.Model):
         managed = False
         db_table = 'tbgoods'
 
+class TbgoodsAdmin(admin.ModelAdmin):
+    list_display = ('nid', 'cname')
+
 
 class Tborderitems(models.Model):
     nid = models.IntegerField(primary_key=True)
@@ -43,6 +49,9 @@ class Tborderitems(models.Model):
     class Meta:
         managed = False
         db_table = 'tborderitems'
+
+class TborderitemsAdmin(admin.ModelAdmin):
+    list_display = ('nid', 'ngood', 'ncount')
 
 
 class Tborders(models.Model):
@@ -56,6 +65,9 @@ class Tborders(models.Model):
         managed = False
         db_table = 'tborders'
 
+class TbordersAdmin(admin.ModelAdmin):
+    list_display = ('nid', 'nuser', 'dtotal')
+
 
 class Tbusers(models.Model):
     nid = models.IntegerField(primary_key=True)
@@ -68,3 +80,6 @@ class Tbusers(models.Model):
     class Meta:
         managed = False
         db_table = 'tbusers'
+
+class TbusersAdmin(admin.ModelAdmin):
+    list_display = ('nid', 'cname', 'dcreate_at')
