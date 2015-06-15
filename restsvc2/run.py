@@ -25,10 +25,10 @@ class TornadoApplication(tornado.web.Application):
 def main():
     app = TornadoApplication()
     http_server = tornado.httpserver.HTTPServer(app,
-    	ssl_options = {
-    		"certfile": "/etc/ssl/certs/selfcacert.pem",
-    		"keyfile": "/etc/ssl/private/selfprivkey.pem"
-    	})
+        ssl_options = {
+            "certfile": "/etc/ssl/certs/selfcacert.pem",
+            "keyfile": "/etc/ssl/private/selfprivkey.pem"
+        })
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
 
