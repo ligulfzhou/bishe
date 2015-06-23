@@ -13,6 +13,7 @@ define("dbname", default="bishe", help="blog database name")
 define("dbuser", default="postgres", help="blog database user")
 define("dbpassword", default="postgres", help="blog database password")
 
+define("pagesize", default=20, help="basically for tbgoods, one page size", type=int)
 
 settings = {}
 

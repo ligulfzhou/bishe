@@ -2,6 +2,7 @@
 
 import json
 from base import BaseHandler
+from tornado.options import options
 from tornado.escape import json_encode
 from tornado.httpclient import HTTPError
 from utils import admin_required, login_required
@@ -10,8 +11,10 @@ class GoodsHandler(BaseHandler):
 
     def get(self):
         cursor = self.conn.cursor()
+        page = self.get_argument("page", 1)
         try:
-            cursor.execute("select nid, cname, dprice, cdesc, ncategoryid, ncount from tbgoods")
+            cursor.execute("select nid, cname, dprice, cdesc, ncategoryid, ncount from tbgoods \
+                            order by nid asc limit {0} offset {1}".format(options.pagesize, options.pagesize * (page - 1)))
         except:
             raise HTTPError(500)
         goods = cursor.fetchall()

@@ -2,6 +2,7 @@
 
 import json
 from base import BaseHandler
+from tornado.options import options
 from tornado.escape import json_encode
 from tornado.httpclient import HTTPError
 from utils import admin_required, login_required
@@ -10,9 +11,13 @@ class CategoriedGoodsHandler(BaseHandler):
 
     def get(self, id, goods=True):
         cursor = self.conn.cursor()
+        page = self.get_argument("page", 1)
+        # print int(page), options.pagesize
         try:
             cursor.execute("select nid, cname, dprice, cdesc, ncategoryid, ncount \
-                from tbgoods where ncategoryid={0}".format(id))
+                            from tbgoods \
+                            where ncategoryid={0} order by nid limit {1} offset {2}".format(
+                                id, options.pagesize, options.pagesize*(int(page) - 1)))
         except:
             raise HTTPError(500)
         goods = cursor.fetchall()
@@ -28,7 +33,7 @@ class CategoriedGoodsHandler(BaseHandler):
         #   'goods':goods_json
         #   }))
         return self.write(json.dumps(goods_json))
-
+        # return self.write("hello world")
 '''
     @admin_required
     def post(self, id, goods=True):

@@ -115,6 +115,15 @@ insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (14,
 insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (15, 'mac air', 8000, 'awesome', 4, 3000);
 insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (16, 'chromium', 3000, 'cheap', 4, 4000);
 
+
+--python
+--import psycopg2
+--conn = psycopg2.connect('host=localhost user=postgres password=postgres dbname=bishe')
+
+
+
+
+
 -- 4: fake orders
 -- user1 one order 
 insert into tborders (nid, nuser_id, dtotal) values (1, 1, 70);
