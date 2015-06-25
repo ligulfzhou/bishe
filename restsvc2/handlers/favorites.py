@@ -32,7 +32,7 @@ class FavoritesHandler(BaseHandler):
                             "dprice": good[2],
                             "cdesc": good[3],
                             "ncategoryid": good[4],
-                            "count": good[5]}
+                            "ncount": good[5]}
                             for good in goods]
             return self.write(json.dumps(goods_json))
         else:
