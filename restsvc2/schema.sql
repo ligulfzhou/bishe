@@ -23,8 +23,6 @@ drop table if exists tbgoods;
 drop table if exists tborders;
 drop table if exists tborderitems;
 
-
-
 ---------------------
 --------------------- create tables
 ---------------------
@@ -49,7 +47,7 @@ create table tbgoods(
 	cname text not null,
 	dprice double precision not null,
 	cdesc text not null,
-	ncategoryid int not null, --references tbcategories(nid) on delete cascade,
+	ncategoryid int not null,
 	ncount int default 0
 );
 
@@ -68,14 +66,28 @@ create table tborderitems(
 	norder_id int references tborders(nid) on delete cascade
 );
 
+create table tbfavorites(
+	nid serial primary key,
+	nuser_id int references tbusers(nid),
+	ngood_id int references tbgoods(nid),
+	dcreate_at timestamp with time zone default now() 
+);
+
+--make a order, insert a comment table, with status == 0
+create table tbcomments(
+	nid serial primary key,
+	nuser_id int references tborders(nid),
+	ngood_id int references tbgoods(nid),
+	content text,
+	dcreate_at timestamp with time zone default now()
+);
 
 ------------------------
------------------------- create extra index
+------------------------ create extra index(for search)
 ------------------------
 create index i_tbusers_cname on tbusers using btree (cname);
 create index i_tbcategories_cname on tbcategories using btree (cname);
 create index i_tbgoods_cname on tbgoods using btree (cname);               -- whether it needs to be unique index ?
-
 
 --------------------------
 ------add fake data-------
@@ -115,14 +127,9 @@ insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (14,
 insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (15, 'mac air', 8000, 'awesome', 4, 3000);
 insert into tbgoods (nid, cname, dprice, cdesc, ncategoryid, ncount) values (16, 'chromium', 3000, 'cheap', 4, 4000);
 
-
 --python
 --import psycopg2
 --conn = psycopg2.connect('host=localhost user=postgres password=postgres dbname=bishe')
-
-
-
-
 
 -- 4: fake orders
 -- user1 one order 
