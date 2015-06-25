@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from handlers import test, categories, goods, login, users, \
+from handlers import categories, goods, login, users, \
     orders, categoriedgoods, usersOrders, ordersorderitems, \
-    favorites
+    favorites #test
 
 url_patterns = [
     #(r"/api/v1", test.TestHandler),
     # (r"/(\d+)/(orders)$", test.OrdersHandler),
-    (r"/api/v1/favorites", test.TestHandler),
+    # (r"/api/v1/favorites", test.TestHandler),
 
     #get categories list, add one category, get one category info 
     (r"/api/v1/categories", categories.CategoriesHandler),
@@ -39,6 +39,6 @@ url_patterns = [
     (r"/api/v1/users/(\d+)/orders", usersOrders.UsersOrdersHandler),
 
     # the goods user likes
-    # (r"/api/v1/favorites", favorites.FavoritesHandler),
+    (r"/api/v1/favorites", favorites.FavoritesHandler),
     (r"/api/v1/favorites/(\d+)", favorites.FavoriteHandler),
 ]

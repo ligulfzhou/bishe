@@ -34,6 +34,7 @@ class TestHandler(BaseHandler):
         else:
             return self.write(json.dumps([]))
 
+    
     @login_required
     def post(self):
         goodid = self.get_argument('goodid', 0)
