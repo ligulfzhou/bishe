@@ -48,7 +48,7 @@ class Application(tornado.web.Application):
                     % (options.dbname, options.dbuser, options.dbpassword, options.dbhost),
                 size=1
             )
-        self.salt = 'c6m9X28ghwQd'
+        self.salt = 'helloworld'
 
 
 class BaseHandler(tornado.web.RequestHandler):
