@@ -28,19 +28,9 @@ import org.apache.http.Header;
 
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link //CategoryFragment.//OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CategoryFragment#//newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CategoryFragment extends BaseFragment {
 
     List<Category> categories;
-//    Category[] categories;
     CategoryAdapter categoryAdapter;
     private ListView listView;
 

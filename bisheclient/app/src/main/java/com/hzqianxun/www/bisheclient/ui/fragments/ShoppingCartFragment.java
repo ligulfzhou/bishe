@@ -3,7 +3,6 @@ package com.hzqianxun.www.bisheclient.ui.fragments;
 import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,15 +27,6 @@ import org.apache.http.Header;
 
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link //ShoppingCartFragment.//OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ShoppingCartFragment#//newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShoppingCartFragment extends BaseFragment {
 
     ListView listView;

@@ -5,8 +5,8 @@ package com.hzqianxun.www.bisheclient.common;
  */
 public class Constant {
 
-    public static final String ACCOUNT_EMAIL = "user.email";
-    public static final String ACCOUNT_PASSWD = "user.passwd";
+    public static final String ACCOUNT_EMAIL = "userlogin.email";
+    public static final String ACCOUNT_PASSWD = "userlogin.passwd";
 
     public static final String PROP_KEY_PRIVATE_TOKEN = "private_token";
     public static final String PROP_KEY_UID = "user.uid";

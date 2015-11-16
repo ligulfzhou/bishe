@@ -22,11 +22,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-/**
- * FragmentUtils of MyHealth
- *
- * @author qixiao
- */
 public class FragmentUtils {
 
     private FragmentUtils() {

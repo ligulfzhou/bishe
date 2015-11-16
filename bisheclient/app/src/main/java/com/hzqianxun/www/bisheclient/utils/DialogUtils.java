@@ -18,22 +18,11 @@ public class DialogUtils {
                 LENGTH_LONG).show();
     }
 
-    /**
-     * Toast提示
-     * @param context
-     * @param msgId
-     */
     public static void showToast(Context context,int msgId){
         Toast.makeText(context, msgId, Toast.LENGTH_LONG).show();
     }
 
 
-    /**
-     * 得到自定义的progressDialog
-     * @param context
-     * @param msg
-     * @return
-     */
    /* public static Dialog createLoadingDialog(Context context, String msg) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view

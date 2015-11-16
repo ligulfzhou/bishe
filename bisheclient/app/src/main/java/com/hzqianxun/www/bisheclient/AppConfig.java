@@ -9,14 +9,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
-
-/**
- * 应用程序配置类：用于保存用户相关信息及设置
- *
- * @author 火蚁 (http://my.oschina.net/LittleDY)
- * @version 1.0
- * @created 2014-04-21
- */
 public class AppConfig {
 
 	private final static String APP_CONFIG = "config";

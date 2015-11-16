@@ -17,13 +17,6 @@ import static com.hzqianxun.www.bisheclient.common.Constant.PROP_KEY_CREATE_AT;
 import static com.hzqianxun.www.bisheclient.common.Constant.PROP_KEY_ROLE;
 import static com.hzqianxun.www.bisheclient.common.Constant.PROP_KEY_PRIVATE_TOKEN;
 
-/**
- * 全局应用程序类：用于保存和调用全局应用配置及访问网络数据
- *
- * @author 火蚁 (http://my.oschina.net/LittleDY)
- * @version 1.0
- * @created 2014-04-22
- */
 public class AppContext extends Application {
 
 	public static final int PAGE_SIZE = 20;// 默认分页大小

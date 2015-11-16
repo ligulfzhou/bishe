@@ -10,7 +10,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +25,7 @@ import static com.hzqianxun.www.bisheclient.api.AsyncHttpHelp.getHttpClient;
 public class RestApi {
 
 //    public final static String HOST = "120.26.36.78/";
-    public final static String HOST = "192.168.57.1/";
+    public final static String HOST = "54.199.179.65/";
     private static final String API_VERSION = "api/v1/";
     public final static String HTTPS = "https://";
     public final static String BASE_URL = HTTPS + HOST + API_VERSION;
@@ -108,8 +107,6 @@ public class RestApi {
 
         Log.d("post make order", entity.toString());
 
-//        httpClient.addHeader("Content-Length", jsonArray.toString().length());
-//        http
         httpClient.post(AppContext.getInstance(), ORDERS, entity, "application/json", handler);
     }
 

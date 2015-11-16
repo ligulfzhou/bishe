@@ -23,7 +23,6 @@ import com.hzqianxun.www.bisheclient.ui.OrderActivity;
 import com.hzqianxun.www.bisheclient.ui.basefragment.BaseFragment;
 import com.hzqianxun.www.bisheclient.utils.JsonUtils;
 import com.hzqianxun.www.bisheclient.viewholder.OrderHolder;
-import com.hzqianxun.www.bisheclient.viewholder.OrderitemHolder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import static com.hzqianxun.www.bisheclient.common.Constant.ORDERID;
@@ -34,15 +33,6 @@ import static com.hzqianxun.www.bisheclient.common.Constant.ORDER_TOTAL;
 import org.apache.http.Header;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MyOrdersFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MyOrdersFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MyOrdersFragment extends BaseFragment {
 
     TextView tv_you_do_not_have_any_orders;

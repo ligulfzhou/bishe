@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by ubuntu on 2015/5/25.
  */
-public class Good implements Serializable{
+public class Good implements Serializable {
 
     @JsonProperty("nid")
     private Integer goodid;
@@ -27,11 +27,11 @@ public class Good implements Serializable{
     @JsonProperty("ncount")
     private Integer count;
 
-    public Good(){
+    public Good() {
         super();
     }
 
-    public Good(Integer goodid, String goodname, double goodprice, String gooddesc, Integer categoryid, Integer count){
+    public Good(Integer goodid, String goodname, double goodprice, String gooddesc, Integer categoryid, Integer count) {
         super();
         this.goodid = goodid;
         this.goodname = goodname;

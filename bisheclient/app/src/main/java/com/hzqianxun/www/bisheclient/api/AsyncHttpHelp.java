@@ -10,14 +10,6 @@ import com.loopj.android.http.RequestParams;
  * Created by ubuntu on 15-6-3.
  */
 
-/*
-*
-* to make sure, the application context variables are accessable to all the classes
-* not only the activities,
-*
-* so, you should choose the implementing the Application class
-*
-* */
 public class AsyncHttpHelp {
 
     public final static int TIMEOUT_CONNECTION = 20000;// 连接超时时间

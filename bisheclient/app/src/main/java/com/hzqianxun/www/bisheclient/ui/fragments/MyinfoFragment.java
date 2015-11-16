@@ -2,8 +2,6 @@ package com.hzqianxun.www.bisheclient.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +20,6 @@ import com.hzqianxun.www.bisheclient.ui.basefragment.BaseFragment;
 import java.util.Date;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link //MyinfoFragment.//OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MyinfoFragment#//newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MyinfoFragment extends BaseFragment {
 
     TextView tv_username, tv_email, tv_register_time;

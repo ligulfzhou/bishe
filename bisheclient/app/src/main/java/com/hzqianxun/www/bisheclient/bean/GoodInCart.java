@@ -3,13 +3,14 @@ package com.hzqianxun.www.bisheclient.bean;
 /**
  * Created by ubuntu on 15-6-5.
  */
-public class GoodInCart{
+public class GoodInCart {
     Integer ngoodid;
     Integer ncount;
 
-    public GoodInCart(){}
+    public GoodInCart() {
+    }
 
-    public GoodInCart(Integer goodid, Integer count){
+    public GoodInCart(Integer goodid, Integer count) {
         super();
         this.ngoodid = goodid;
         this.ncount = count;

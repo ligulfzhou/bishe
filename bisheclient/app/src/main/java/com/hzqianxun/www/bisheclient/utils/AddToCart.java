@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.hzqianxun.www.bisheclient.bean.GoodInCart;
 
-import java.sql.SQLData;
 import java.util.LinkedList;
 import java.util.List;
 

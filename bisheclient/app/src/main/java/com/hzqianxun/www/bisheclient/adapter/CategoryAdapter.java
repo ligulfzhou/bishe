@@ -12,9 +12,6 @@ import com.hzqianxun.www.bisheclient.R;
 import com.hzqianxun.www.bisheclient.bean.Category;
 import com.hzqianxun.www.bisheclient.viewholder.CategoryHolder;
 
-import java.util.List;
-
-
 /**
  * Created by ubuntu on 15-6-4.
  */

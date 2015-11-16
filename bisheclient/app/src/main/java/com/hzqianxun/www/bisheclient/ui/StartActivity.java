@@ -52,9 +52,7 @@ public class StartActivity extends FragmentActivity implements TabView.OnTabChan
         mCurrentFragment = new MyinfoFragment();
         FragmentUtils.replaceFragment(mFragmentManager, R.id.layout_content, MyinfoFragment.class, null, false);
     }
-    /* (non-Javadoc)
-     * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int, android.content.Intent)
-     */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -1,20 +1,3 @@
-/*******************************************************************************
- *
- * Copyright (c) Weaver Info Tech Co. Ltd
- *
- * TabView
- *
- * app.ui.widget.TabView.java
- * TODO: File description or class description.
- *
- * @author: Administrator
- * @since:  2014-4-22
- * @version: 1.0.0
- *
- * @changeLogs:
- *     1.0.0: First created this class.
- *
- ******************************************************************************/
 package com.hzqianxun.www.bisheclient.ui.widgets;
 
 import android.annotation.TargetApi;
@@ -29,10 +12,6 @@ import android.widget.LinearLayout;
 import com.hzqianxun.www.bisheclient.R;
 
 
-/**
- * @author Administrator
- *
- */
 public class TabView extends LinearLayout implements OnClickListener {
 
     private OnTabChangeListener mOnTabChangedListener;
@@ -54,11 +33,6 @@ public class TabView extends LinearLayout implements OnClickListener {
         this(context, attrs, 0);
     }
 
-    /**
-     * @param context
-     * @param attrs
-     * @param defStyle
-     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public TabView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -129,10 +103,6 @@ public class TabView extends LinearLayout implements OnClickListener {
         } // else ignored
     }
 
-
-    /* (non-Javadoc)
-     * @see android.view.View.OnClickListener#onClick(android.view.View)
-     */
     @Override
     public void onClick(View v) {
 

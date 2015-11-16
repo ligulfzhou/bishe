@@ -20,18 +20,12 @@ public abstract class BaseFragment extends Fragment implements FragmentInterface
         fragmentManager.popBackStackImmediate();
     }
 
-    /* (non-Javadoc)
-     * @see android.support.v4.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
-     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         view.setOnTouchListener(this);
         super.onViewCreated(view, savedInstanceState);
     }
 
-    /* (non-Javadoc)
-     * @see android.view.View.OnTouchListener#onTouch(android.view.View, android.view.MotionEvent)
-     */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         // 拦截触摸事件，防止传递到下一层的View

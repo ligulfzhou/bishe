@@ -14,10 +14,6 @@ import java.util.List;
 
 import javax.net.ssl.SSLHandshakeException;
 
-
-/***
- * json工具解析类
- */
 public class JsonUtils {
 
 	public static final ObjectMapper MAPPER = new ObjectMapper().configure(

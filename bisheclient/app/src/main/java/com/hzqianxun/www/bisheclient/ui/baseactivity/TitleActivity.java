@@ -1,20 +1,3 @@
-/*******************************************************************************
- *
- * Copyright (c) Weaver Info Tech Co. Ltd
- *
- * TitleActivity
- *
- * app.client.TitleActivity.java
- * TODO: File description or class description.
- *
- * @author: qixiao
- * @since:  Jul 11, 2013
- * @version: 1.0.0
- *
- * @changeLogs:
- *     1.0.0: First created this class.
- *
- ******************************************************************************/
 package com.hzqianxun.www.bisheclient.ui.baseactivity;
 
 import android.os.Bundle;
@@ -37,9 +20,6 @@ public class TitleActivity extends BaseActivity implements OnClickListener {
 
     private FrameLayout mContentLayout;
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreate(android.os.Bundle)
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,34 +56,21 @@ public class TitleActivity extends BaseActivity implements OnClickListener {
 
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#setTitle(int)
-     */
     @Override
     public void setTitle(int titleId) {
         mTitleTextView.setText(titleId);
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#setTitle(java.lang.CharSequence)
-     */
     @Override
     public void setTitle(CharSequence title) {
         mTitleTextView.setText(title);
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#setTitleColor(int)
-     */
     @Override
     public void setTitleColor(int textColor) {
         mTitleTextView.setTextColor(textColor);
     }
 
-
-    /* (non-Javadoc)
-     * @see android.app.Activity#setContentView(int)
-     */
     @Override
     public void setContentView(int layoutResID) {
         mContentLayout.removeAllViews();
@@ -111,9 +78,6 @@ public class TitleActivity extends BaseActivity implements OnClickListener {
         onContentChanged();
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#setContentView(android.view.View)
-     */
     @Override
     public void setContentView(View view) {
         mContentLayout.removeAllViews();
@@ -121,9 +85,6 @@ public class TitleActivity extends BaseActivity implements OnClickListener {
         onContentChanged();
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#setContentView(android.view.View, android.view.ViewGroup.LayoutParams)
-     */
     @Override
     public void setContentView(View view, LayoutParams params) {
         mContentLayout.removeAllViews();
@@ -131,9 +92,6 @@ public class TitleActivity extends BaseActivity implements OnClickListener {
         onContentChanged();
     }
 
-    /* (non-Javadoc)
-     * @see android.view.View.OnClickListener#onClick(android.view.View)
-     */
     @Override
     public void onClick(View v) {
 

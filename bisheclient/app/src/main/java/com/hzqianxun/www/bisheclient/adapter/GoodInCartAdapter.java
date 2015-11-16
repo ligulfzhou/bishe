@@ -12,8 +12,6 @@ import com.hzqianxun.www.bisheclient.R;
 import com.hzqianxun.www.bisheclient.bean.GoodInCart;
 import com.hzqianxun.www.bisheclient.viewholder.GoodInCartHolder;
 
-import java.util.List;
-
 /**
  * Created by ubuntu on 15-6-7.
  */
