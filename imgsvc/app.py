@@ -6,22 +6,19 @@ import tornado.options
 import tornado.web
 import tornado.gen
 import tornado.escape
-
+from tornado.gen import coroutine
 from tornado.options import define, options
-from fdfsclient import fdfsclient
 
+from fdfsclient import fdfsclient
 import psycopg2
 import momoko
-
 import time
-
 from PIL import Image
 import cStringIO, io
 
 import logging
-logging.basicConfig(filename='logfile',level=logging.DEBUG)
+logging.basicConfig(filename='log.log',level=logging.DEBUG)
 
-#jk29k&d39c8mB
 define('port', default=8888, help='run on the given port', type=int)
 define('dbname', default=os.environ.get('DBNAME') or 'image', help='db name')
 define('dbuser', default=os.environ.get('DBUSER') or 'postgres', help='db user')
@@ -58,14 +55,12 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 class UploadImageHandler(BaseHandler):
-
-    @tornado.gen.coroutine
+    @coroutine
     def post(self):
         imgid   = self.get_argument('md5', '')
         sign    = self.get_argument('sign', '')
         img_content = self.request.body
 
-        # check the file size limit, 1Mb --> 
         img_size    = len(img_content)
         if img_size > 1024000:
             self.set_status(403)
@@ -84,10 +79,7 @@ class UploadImageHandler(BaseHandler):
                 'error' : 'fail to imgid or sign check'
             }
             self.set_header('Content-Type', 'text/javascript')
-            self.write(tornado.escape.json_encode(json_data))
-            
-            self.finish()
-            return 
+            return self.write(tornado.escape.json_encode(json_data))
 
         else:
             # build the image class to get some statistic
@@ -99,40 +91,17 @@ class UploadImageHandler(BaseHandler):
             try:
                 ret = fdfsclient.upload_by_buffer(img_content)
             except:
-                
                 self.set_status(403)
                 logging.info('%s : upload error' % (time.ctime()))
-
-                '''
-                json_data = {
-                    'error' : 'upload image error'
-                }
-                self.set_header('Content-Type', 'text/javascript')
-                self.write(tornado.escape.json_encode(json_data))
-                '''
-
-                self.finish()
                 return
 
             else:
                 remote_file_id = ret['Remote file_id']
-
                 try:
                     cursor = yield momoko.Op(self.db.execute, "select size, length, width, fmat from image where imgid = '%s'" % imgid)
                 except:
                     self.set_status(500)
                     logging.info('%s : when check image is already exist, database lookup error' % (time.ctime()))
-
-                    '''
-                    json_data = {
-                        'error' : 'when check image is already exist, database lookup error'
-                    }
-                    self.set_header('Content-Type', 'text/javascript')
-                    self.write(tornado.escape.json_encode(json_data))
-                    '''
-
-                    self.finish()
-
                     return
                 else:
                     img_ft = cursor.fetchone()
@@ -152,44 +121,28 @@ class UploadImageHandler(BaseHandler):
                                 'error' : 'insert to database error'
                             }
                             self.set_header('Content-Type', 'text/javascript')
-                            self.write(tornado.escape.json_encode(json_data))
-                            
-                            self.finish()
-
-                            return
+                            return self.write(tornado.escape.json_encode(json_data))
                         else:
                             logging.info('%s : image: %s upload success,remote_file_id: %s' % (time.ctime(), '', remote_file_id))
                             json_data = {
                                 'success' : 'image upload success'
                             }
                             self.set_header('Content-Type', 'text/javascript')
-                            self.write(tornado.escape.json_encode(json_data))
-                            
-                            self.finish()
+                            return self.write(tornado.escape.json_encode(json_data))
                     else:
                         logging.info('%s : image already exist' % (time.ctime()))
-                        #self.set_status(403)
-                        #json_data = {
-                        #    'error' : 'image already exist'
-                        #}
                         json_data = {
                             'success' : 'image upload success'
                         }
                         self.set_header('Content-Type', 'text/javascript')
-                        self.write(tornado.escape.json_encode(json_data))
-
-                        self.finish()
-
+                        return self.write(tornado.escape.json_encode(json_data))
 
 
 class QueryImageHandler(BaseHandler):
-
-    @tornado.gen.coroutine
+    @coroutine
     def get(self):
-
         imgid           = self.get_argument('md5', '')
         sign            = self.get_argument('sign', '')
-        
         if sign != hashlib.md5(imgid + self.application.salt).hexdigest():
             self.write('forbidden')
             self.set_status(403)
@@ -208,10 +161,7 @@ class QueryImageHandler(BaseHandler):
                     'imgid' : imgid,
                     'result' : 'not found'
                 }
-                self.set_header('Content-Type', 'text/javascript')
-                self.write(tornado.escape.json_encode(json_data))
-
-                self.finish()
+                return self.write(tornado.escape.json_encode(json_data))
             else:
                 json_data = {
                     'size' : size,
@@ -220,22 +170,18 @@ class QueryImageHandler(BaseHandler):
                     'fmat':fmat
                 }
             self.set_header('Content-Type', 'text/javascript')
-            self.write(tornado.escape.json_encode(json_data))
-
-            self.finish()
+            return self.write(tornado.escape.json_encode(json_data))
 
 
 class DownloadImageHandler(BaseHandler):
-
     @tornado.gen.coroutine
     def get(self):
         imgid   = self.get_argument('md5', '')
         sign    = self.get_argument('sign', '')
         
         if sign != hashlib.md5(imgid + self.application.salt).hexdigest():
-            self.write('forbidden')
             self.set_status(403)
-            self.finish()
+            return self.write('forbidden')
         else:
             try:
                 cursor = yield momoko.Op(self.db.execute, "select remote_file_id, fmat from image where imgid='%s'" % (imgid, ))
@@ -243,7 +189,6 @@ class DownloadImageHandler(BaseHandler):
                 self.set_status(500)
                 logging.info('%s : download image: when lookup table, error ocurs' % (time.ctime()))
                 return 
-        
             try:
                 img     = cursor.fetchone()
                 remote_file_id, fmat = img
@@ -259,9 +204,8 @@ class DownloadImageHandler(BaseHandler):
                 s = o.getvalue()          
                 self.set_header('Content-Type', 'image/%s' % fmat)
                 self.set_header('Content-length', len(s))
-                self.write(s)
-            
-            self.finish()
+                return self.write(s)
+
 
 def main():
     tornado.options.parse_command_line()
